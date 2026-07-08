@@ -338,11 +338,16 @@ class Component extends DCLogic {
     if (!it.pmcid) return;
     const id = it.pmcid.replace(/[^0-9A-Z]/gi, '');
     fetch('https://www.ebi.ac.uk/europepmc/webservices/rest/' + id + '/fullTextXML').then(r => r.ok ? r.text() : '').then(xml => {
-      const m = xml.match(/<graphic[^>]*xlink:href="([^"]+)"/i);
-      if (!m) return;
-      let blob = m[1];
-      if (!/\.(jpe?g|png|gif|tif?f)$/i.test(blob)) blob += '.jpg';
-      const u = 'https://europepmc.org/backend/ptpmcrender.fcgi?acc=' + id + '&blobtype=image&blobname=' + encodeURIComponent(blob);
+      const figs = xml.match(/<fig\b[\s\S]*?<\/fig>/gi) || [];
+      let href = null;
+      for (let i = figs.length - 1; i >= 0; i--) {                 // last real figure in the paper
+        const g = figs[i].match(/<graphic[^>]*xlink:href="([^"]+)"/i);
+        if (g) { href = g[1]; break; }
+      }
+      if (!href) { const g = xml.match(/<graphic[^>]*xlink:href="([^"]+)"/i); if (g) href = g[1]; }
+      if (!href) return;
+      if (!/\.(jpe?g|png|gif|tif?f)$/i.test(href)) href += '.jpg';
+      const u = 'https://www.ncbi.nlm.nih.gov/pmc/articles/' + id + '/bin/' + href;
       const probe = new Image();
       probe.onload = () => {
         this.setState(s => {
