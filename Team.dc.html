@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#1b2233;background:#fff;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:#232D4B;text-decoration:none}
+  a:hover{color:#E57200}
+  *{box-sizing:border-box}
+  [data-reveal]{opacity:0}
+</style>
+</helmet>
+
+<dc-import name="SiteHeader" active="team" hint-size="100%,74px"></dc-import>
+
+<section style="position:relative;padding:76px 0 40px;overflow:hidden;background:radial-gradient(900px 420px at 82% -10%,rgba(43,179,179,.12),transparent 60%),radial-gradient(760px 380px at 8% 10%,rgba(229,114,0,.10),transparent 55%),linear-gradient(180deg,#fbfcfe,#f3f6fb)">
+  <div style="max-width:1160px;margin:0 auto;padding:0 26px">
+    <div style="font-size:.86rem;color:#5b6478;margin-bottom:18px"><a href="index.html" style="color:#5b6478" style-hover="color:#E57200">Home</a> · Team</div>
+    <p style="text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;font-weight:700;color:#E57200;margin:0 0 14px">Our People</p>
+    <h1 style="font-size:clamp(2.1rem,4vw,3rem);color:#232D4B;font-weight:800;line-height:1.15;letter-spacing:-.02em;margin:0">The people behind the science</h1>
+    <p style="color:#5b6478;font-size:1.14rem;max-width:60ch;margin:18px 0 0">We're a group of virologists, neuroscientists, and molecular biologists working to understand how herpes simplex virus hides in neurons — and what makes it wake up.</p>
+  </div>
+</section>
+
+<main style="padding:56px 0 90px">
+  <div style="max-width:1160px;margin:0 auto;padding:0 26px">
+
+    <!-- PI -->
+    <div data-reveal style="margin-bottom:60px">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:28px">
+        <h2 style="font-size:1.5rem;color:#232D4B;font-weight:800;white-space:nowrap;margin:0">Principal Investigator</h2>
+        <span style="height:1px;background:#e2e7f0;flex:1"></span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:34px;align-items:flex-start;background:linear-gradient(180deg,#fff,#fbfcfe);border:1px solid #e2e7f0;border-radius:22px;padding:38px;box-shadow:0 10px 40px rgba(35,45,75,.10)">
+        <div style="width:150px;height:150px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(160deg,#232D4B,#33406a);color:#fff;font-weight:800;font-size:2.4rem;position:relative;overflow:hidden;flex:0 0 auto">
+          <img src="images/anna-cliffe.jpg" alt="" onError="{{ onImgErr }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">AC
+        </div>
+        <div style="flex:1;min-width:280px">
+          <h3 style="font-size:1.7rem;color:#232D4B;margin:0;line-height:1.15">Anna Cliffe, PhD</h3>
+          <div style="color:#E57200;font-weight:700;margin:6px 0 4px">Principal Investigator</div>
+          <div style="color:#5b6478;font-size:.95rem;margin-bottom:14px">Associate Professor, Department of Microbiology, Immunology &amp; Cancer Biology · Member, Neuroscience Graduate Program</div>
+          <p style="margin:0 0 14px;color:#3f4859">Anna earned her PhD at the University of Edinburgh studying herpesvirus non-coding RNAs, then trained as a postdoc with David Knipe at Harvard Medical School on the chromatin regulation of HSV infection. In Mohanish Deshmukh's lab at UNC she built a primary neuronal system to study HSV latency and reactivation. She joined UVA in August 2016 and was promoted to Associate Professor in 2022.</p>
+          <div style="display:flex;gap:22px;flex-wrap:wrap;font-size:.92rem;font-weight:600">
+            <a href="{{ emailHref }}" style="color:#232D4B;display:inline-flex;align-items:center;gap:8px" style-hover="color:#E57200">✉ Email Anna Cliffe</a>
+            <a href="tel:+14349247780" style="color:#232D4B;display:inline-flex;align-items:center;gap:8px" style-hover="color:#E57200">☎ (434) 924-7780</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- role groups -->
+    <sc-for list="{{ groups }}" as="grp" hint-placeholder-count="3">
+      <div data-reveal style="margin-bottom:60px">
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:28px">
+          <h2 style="font-size:1.5rem;color:#232D4B;font-weight:800;white-space:nowrap;margin:0">{{ grp.title }}</h2>
+          <span style="height:1px;background:#e2e7f0;flex:1"></span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px">
+          <sc-for list="{{ grp.members }}" as="m" hint-placeholder-count="3">
+            <div style="display:flex;gap:20px;align-items:flex-start;background:#fff;border:1px solid #e2e7f0;border-radius:18px;padding:24px;transition:transform .3s,box-shadow .3s" style-hover="transform:translateY(-5px);box-shadow:0 10px 40px rgba(35,45,75,.10)">
+              <div style="width:74px;height:74px;border-radius:50%;display:grid;place-items:center;background:{{ m.avatarBg }};color:#fff;font-weight:800;font-size:1.2rem;position:relative;overflow:hidden;flex:0 0 auto">
+                <img src="{{ m.img }}" alt="" onError="{{ onImgErr }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">{{ m.initials }}
+              </div>
+              <div>
+                <h3 style="font-size:1.12rem;color:#232D4B;margin:0">{{ m.name }}</h3>
+                <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#E57200;margin:4px 0 9px">{{ m.role }}</div>
+                <sc-if value="{{ m.bio }}" hint-placeholder-val="{{ true }}"><p style="font-size:.9rem;color:#4a5265;margin:0">{{ m.bio }}</p></sc-if>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+
+    <!-- Alumni -->
+    <div data-reveal style="margin-bottom:60px">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:28px">
+        <h2 style="font-size:1.5rem;color:#232D4B;font-weight:800;white-space:nowrap;margin:0">Lab Alumni</h2>
+        <span style="height:1px;background:#e2e7f0;flex:1"></span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px 32px">
+        <sc-for list="{{ alumni }}" as="a" hint-placeholder-count="4">
+          <div style="display:flex;gap:14px;align-items:baseline;padding:14px 0;border-bottom:1px solid #e2e7f0">
+            <span style="font-size:.78rem;font-weight:700;color:#2bb3b3;white-space:nowrap;min-width:96px">{{ a.years }}</span>
+            <span style="color:#5b6478;font-size:.92rem"><sc-if value="{{ a.href }}" hint-placeholder-val="{{ false }}"><a href="{{ a.href }}" target="_blank" rel="noopener" style="color:#232D4B;font-weight:700" style-hover="color:#E57200">{{ a.name }}</a></sc-if><sc-if value="{{ a.noLink }}" hint-placeholder-val="{{ true }}"><b style="color:#232D4B">{{ a.name }}</b></sc-if> — {{ a.note }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <!-- Join CTA -->
+    <div data-reveal style="background:radial-gradient(700px 360px at 85% 0%,rgba(43,179,179,.14),transparent 60%),#1a2338;color:#fff;border-radius:22px;padding:48px;text-align:center">
+      <h2 style="font-size:1.7rem;font-weight:800;margin:0 0 12px">Interested in joining us?</h2>
+      <p style="color:#c2cadd;max-width:52ch;margin:0 auto 24px">We welcome graduate students, rotation students, and postdocs curious about virology, chromatin, and neuroscience.</p>
+      <a href="index.html#join" style="display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:.98rem;padding:14px 26px;border-radius:100px;background:#E57200;color:#fff;box-shadow:0 10px 26px rgba(229,114,0,.32);transition:transform .2s,box-shadow .25s" style-hover="transform:translateY(-2px);box-shadow:0 16px 34px rgba(229,114,0,.4)">See how to join
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+
+  </div>
+</main>
+
+<dc-import name="SiteFooter" tagline="Team details from the lab's UVA People page" hint-size="100%,320px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  componentDidMount(){ this.setupReveals(); }
+  componentDidUpdate(){ if (this._observeReveals) this._observeReveals(); }
+  componentWillUnmount(){ if (this._revIO) this._revIO.disconnect(); }
+  setupReveals(){
+    this._reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this._revIO = new IntersectionObserver((ents) => {
+      ents.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target; this._revIO.unobserve(el);
+        el.animate([{ opacity: 0, transform: 'translateY(28px)' }, { opacity: 1, transform: 'none' }], { duration: this._reduce ? 0 : 700, easing: 'cubic-bezier(.16,.84,.44,1)', fill: 'forwards' });
+      });
+    }, { threshold: .12, rootMargin: '0px 0px -6% 0px' });
+    this._observeReveals = () => { document.querySelectorAll('[data-reveal]').forEach(el => { if (!el.__rev) { el.__rev = 1; this._revIO.observe(el); } }); };
+    this._observeReveals();
+  }
+  renderVals(){
+    const navy = 'linear-gradient(160deg,#232D4B,#33406a)';
+    const orange = 'linear-gradient(160deg,#E57200,#c85f00)';
+    return {
+      emailHref: 'mailto:' + 'ude.ainigriv@effilc'.split('').reverse().join(''),
+      onImgErr: (e) => { e.currentTarget.style.display = 'none'; },
+      groups: [
+        {
+          title: 'Lab Manager',
+          members: [
+            { name: 'Matt Loftus', role: 'Lab Manager', initials: 'ML', avatarBg: orange, img: 'images/matt-loftus.jpg', bio: 'Matt studies the mechanisms of Polycomb silencing in HSV latency and the role of a viral non-coding RNA.' }
+          ]
+        },
+        {
+          title: 'Technical Assistants',
+          members: [
+            { name: 'Christian J. Sanchez', role: 'Technical Assistant', initials: 'CS', avatarBg: orange, img: 'images/christian-sanchez.jpg', bio: '' }
+          ]
+        },
+        {
+          title: 'Graduate Students',
+          members: [
+            { name: 'Zoe Reich', role: 'Graduate Student', initials: 'ZR', avatarBg: navy, img: 'images/zoe-reich.jpg', bio: '' },
+            { name: 'Anne-Fluer Winter', role: 'Graduate Student', initials: 'AW', avatarBg: navy, img: 'images/annefluer-winter.jpg', bio: '' }
+          ]
+        },
+        {
+          title: 'Postdoctoral Research Fellows',
+          members: [
+            { name: 'Patryk Krakowiak', role: 'Postdoctoral Fellow', initials: 'PK', avatarBg: navy, img: 'images/patryk-krakowiak.jpg', bio: 'Patryk investigates cell-type-specific responses to HSV infection and how HSV-1 co-opts host signaling pathways for reactivation.' },
+            { name: 'Chandra Shekar Misra', role: 'Postdoctoral Fellow', initials: 'CM', avatarBg: navy, img: 'images/chandra-misra.jpg', bio: '' },
+            { name: 'Kristina Delgado', role: 'Postdoctoral Fellow', initials: 'KD', avatarBg: navy, img: 'images/kristina-delgado.jpg', bio: '' },
+            { name: 'Randall Schirra', role: 'Postdoctoral Fellow', initials: 'RS', avatarBg: navy, img: 'images/randall-schirra.jpg', bio: '' }
+          ]
+        }
+      ],
+      alumni: [
+        { years: '2019–2025', name: 'Sara Dochnal, PhD', note: 'Graduate student then postdoctoral fellow; chromatin-based regulation of HSV reactivation.', href: 'https://www.linkedin.com/in/sara-dochnal-phd-966b12144/' },
+        { years: '2021–2025', name: 'Abby Whitford', note: 'Graduate student; epigenetics of HSV latency.', href: 'https://www.linkedin.com/in/abigail-whitford/' },
+        { years: '2018–2024', name: 'Alison Francois', note: 'Graduate student; facultative heterochromatin in HSV latency.', href: 'https://www.linkedin.com/in/alisonfrancois/' },
+        { years: '2022–2025', name: 'Matthew Flores', note: 'Research technician; immune signaling in HSV latency and reactivation.', href: 'https://www.linkedin.com/in/matthew-f-3a308111a/' },
+        { years: '2019–2023', name: 'Sean Cuddy', note: 'Graduate student. Now a consultant at Boston Consulting Group.' },
+        { years: '2018–2019', name: 'Aleksandra Babnis', note: 'Visiting graduate student. Now a PhD student at the IMPRS for Molecular Life Sciences, Munich.' },
+        { years: '2017–2019', name: 'Austin Schinlever', note: 'Lab technician (HSV reactivation & neuronal hyperexcitability). Now a graduate student at NYU.' },
+        { years: '2018–2021', name: 'Jon Suzich', note: "The lab's first graduate student (F30, UVA Wagner Fellowship). Now in the UVA MSTP." }
+      ].map(a => ({ ...a, href: a.href || '', noLink: !a.href }))
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<footer style="background:#12182a;color:#9aa3ba;padding:54px 0 40px;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;line-height:1.6">
+  <div style="max-width:1160px;margin:0 auto;padding:0 26px">
+    <div style="display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;align-items:flex-start">
+      <div style="max-width:360px">
+        <a href="index.html" style="display:inline-flex;align-items:center;gap:13px;text-decoration:none;color:#fff;font-weight:800;letter-spacing:-.02em;font-size:1.16rem">
+          <svg width="38" height="38" viewBox="0 0 42 42" fill="none" aria-hidden="true">
+            <rect width="42" height="42" rx="11" fill="#E57200"/>
+            <path d="M13 10c0 6 16 6 16 12s-16 6-16 12" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M29 10c0 6-16 6-16 12s16 6 16 12" stroke="#232D4B" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+          <span>Cliffe Lab<span style="display:block;font-size:.66rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7f89a3">University of Virginia</span></span>
+        </a>
+        <p style="max-width:34ch;margin:16px 0 0;font-size:.9rem">Department of Microbiology, Immunology &amp; Cancer Biology, UVA School of Medicine, Charlottesville, VA.</p>
+      </div>
+      <div style="display:flex;gap:60px;flex-wrap:wrap">
+        <div>
+          <h4 style="color:#fff;font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;margin:0 0 14px">Explore</h4>
+          <a href="index.html#focus" style="display:block;color:#9aa3ba;font-size:.92rem;margin-bottom:9px;text-decoration:none;transition:color .2s" style-hover="color:#f59331">Research</a>
+          <a href="Publications.dc.html" style="display:block;color:#9aa3ba;font-size:.92rem;margin-bottom:9px;text-decoration:none;transition:color .2s" style-hover="color:#f59331">Publications</a>
+          <a href="index.html#news" style="display:block;color:#9aa3ba;font-size:.92rem;margin-bottom:9px;text-decoration:none;transition:color .2s" style-hover="color:#f59331">Lab News</a>
+          <a href="Team.dc.html" style="display:block;color:#9aa3ba;font-size:.92rem;margin-bottom:9px;text-decoration:none;transition:color .2s" style-hover="color:#f59331">Team</a>
+          <a href="Contact.dc.html" style="display:block;color:#9aa3ba;font-size:.92rem;margin-bottom:9px;text-decoration:none;transition:color .2s" style-hover="color:#f59331">Contact</a>
+          <a href="index.html#join" style="display:block;color:#9aa3ba;font-size:.92rem;margin-bottom:9px;text-decoration:none;transition:color .2s" style-hover="color:#f59331">Join the Lab</a>
+        </div>
+        <div>
+          <h4 style="color:#fff;font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;margin:0 0 14px">University</h4>
+          <a href="https://med.virginia.edu/mic/" target="_blank" rel="noopener" style="display:block;color:#9aa3ba;font-size:.92rem;margin-bottom:9px;text-decoration:none;transition:color .2s" style-hover="color:#f59331">UVA MIC Department</a>
+          <a href="https://med.virginia.edu/bims/prospective-students/apply-now/" target="_blank" rel="noopener" style="display:block;color:#9aa3ba;font-size:.92rem;margin-bottom:9px;text-decoration:none;transition:color .2s" style-hover="color:#f59331">BIMS — Apply</a>
+          <a href="https://med.virginia.edu/cliffe/" target="_blank" rel="noopener" style="display:block;color:#9aa3ba;font-size:.92rem;margin-bottom:9px;text-decoration:none;transition:color .2s" style-hover="color:#f59331">Lab @ UVA</a>
+          <a href="https://pubmed.ncbi.nlm.nih.gov/?term=Cliffe+AR%5BAuthor%5D+AND+Virginia%5BAffiliation%5D&sort=date" target="_blank" rel="noopener" style="display:block;color:#9aa3ba;font-size:.92rem;margin-bottom:9px;text-decoration:none;transition:color .2s" style-hover="color:#f59331">PubMed</a>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,.08);margin-top:40px;padding-top:24px;font-size:.84rem;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+      <span>© {{ year }} Cliffe Lab · University of Virginia</span>
+      <span>{{ tagline }}</span>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:320},&quot;tagline&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Publications feed via Europe PMC&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals(){
+    return {
+      year: new Date().getFullYear(),
+      tagline: this.props.tagline || 'Publications feed via Europe PMC'
+    };
+  }
+}
+</script>
+</body>
+</html>
