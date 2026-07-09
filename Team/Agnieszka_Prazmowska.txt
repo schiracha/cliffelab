@@ -1,0 +1,7 @@
+Name: "Agnieszka Prazmowska"
+Position: "BioLab Student"
+Description: "BioLab Student; HSV-1 epigenetic signaling"
+Start Year: "2024"
+End Year: "2026"
+Link: ""
+[End]

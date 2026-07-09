@@ -18,6 +18,7 @@
   a:hover{color:#E57200}
   *{box-sizing:border-box}
   [data-reveal]{opacity:0}
+  @keyframes clfsh{0%{background-position:100% 0}100%{background-position:-100% 0}}
 </style>
 </helmet>
 
@@ -58,8 +59,26 @@
       </div>
     </div>
 
-    <!-- role groups -->
-    <sc-for list="{{ groups }}" as="grp" hint-placeholder-count="3">
+<!-- role groups -->
+    <sc-if value="{{ teamLoading }}" hint-placeholder-val="{{ true }}">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-bottom:60px">
+        <sc-for list="{{ teamSkeletons }}" as="s" hint-placeholder-count="3">
+          <div style="display:flex;gap:20px;align-items:flex-start;background:#fff;border:1px solid #e2e7f0;border-radius:18px;padding:24px">
+            <div style="width:74px;height:74px;border-radius:50%;flex:0 0 auto;background:linear-gradient(90deg,#eef1f7 25%,#e3e8f1 37%,#eef1f7 63%);background-size:400% 100%;animation:clfsh 1.4s infinite"></div>
+            <div style="flex:1">
+              <div style="height:15px;width:60%;margin-bottom:10px;border-radius:6px;background:linear-gradient(90deg,#eef1f7 25%,#e3e8f1 37%,#eef1f7 63%);background-size:400% 100%;animation:clfsh 1.4s infinite"></div>
+              <div style="height:11px;width:40%;border-radius:6px;background:linear-gradient(90deg,#eef1f7 25%,#e3e8f1 37%,#eef1f7 63%);background-size:400% 100%;animation:clfsh 1.4s infinite"></div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ teamEmpty }}" hint-placeholder-val="{{ false }}">
+      <div style="text-align:center;padding:40px;color:#5b6478;background:#fbfcfe;border:1px dashed #e2e7f0;border-radius:18px;margin-bottom:60px">Team roster coming soon.</div>
+    </sc-if>
+
+    <sc-for list="{{ groups }}" as="grp" hint-placeholder-count="0">
       <div data-reveal style="margin-bottom:60px">
         <div style="display:flex;align-items:center;gap:16px;margin-bottom:28px">
           <h2 style="font-size:1.5rem;color:#232D4B;font-weight:800;white-space:nowrap;margin:0">{{ grp.title }}</h2>
@@ -69,7 +88,7 @@
           <sc-for list="{{ grp.members }}" as="m" hint-placeholder-count="3">
             <div style="display:flex;gap:20px;align-items:flex-start;background:#fff;border:1px solid #e2e7f0;border-radius:18px;padding:24px;transition:transform .3s,box-shadow .3s" style-hover="transform:translateY(-5px);box-shadow:0 10px 40px rgba(35,45,75,.10)">
               <div style="width:74px;height:74px;border-radius:50%;display:grid;place-items:center;background:{{ m.avatarBg }};color:#fff;font-weight:800;font-size:1.2rem;position:relative;overflow:hidden;flex:0 0 auto">
-                <img src="{{ m.img }}" alt="" onError="{{ onImgErr }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">{{ m.initials }}
+                <div style="{{ m.imgStyle }}"></div>{{ m.initials }}
               </div>
               <div>
                 <h3 style="font-size:1.12rem;color:#232D4B;margin:0">{{ m.name }}</h3>
@@ -82,7 +101,7 @@
       </div>
     </sc-for>
 
-    <!-- Alumni -->
+<!-- Alumni -->
     <div data-reveal style="margin-bottom:60px">
       <div style="display:flex;align-items:center;gap:16px;margin-bottom:28px">
         <h2 style="font-size:1.5rem;color:#232D4B;font-weight:800;white-space:nowrap;margin:0">Lab Alumni</h2>
@@ -90,9 +109,12 @@
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px 32px">
         <sc-for list="{{ alumni }}" as="a" hint-placeholder-count="4">
-          <div style="display:flex;gap:14px;align-items:baseline;padding:14px 0;border-bottom:1px solid #e2e7f0">
-            <span style="font-size:.78rem;font-weight:700;color:#2bb3b3;white-space:nowrap;min-width:96px">{{ a.years }}</span>
-            <span style="color:#5b6478;font-size:.92rem"><sc-if value="{{ a.href }}" hint-placeholder-val="{{ false }}"><a href="{{ a.href }}" target="_blank" rel="noopener" style="color:#232D4B;font-weight:700" style-hover="color:#E57200">{{ a.name }}</a></sc-if><sc-if value="{{ a.noLink }}" hint-placeholder-val="{{ true }}"><b style="color:#232D4B">{{ a.name }}</b></sc-if> — {{ a.note }}</span>
+          <div style="display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid #e2e7f0">
+            <div style="display:flex;flex-direction:column;align-items:flex-start;gap:8px;min-width:96px;flex:0 0 auto">
+              <span style="font-size:.78rem;font-weight:700;color:#2bb3b3;white-space:nowrap">{{ a.years }}</span>
+              <div style="{{ a.photoStyle }}"></div>
+            </div>
+            <span style="color:#5b6478;font-size:.92rem;padding-top:1px"><sc-if value="{{ a.href }}" hint-placeholder-val="{{ false }}"><a href="{{ a.href }}" target="_blank" rel="noopener" style="color:#232D4B;font-weight:700" style-hover="color:#E57200">{{ a.name }}</a></sc-if><sc-if value="{{ a.noLink }}" hint-placeholder-val="{{ true }}"><b style="color:#232D4B">{{ a.name }}</b></sc-if> — {{ a.note }}</span>
           </div>
         </sc-for>
       </div>
@@ -114,7 +136,14 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:900}}">
 class Component extends DCLogic {
-  componentDidMount(){ this.setupReveals(); }
+  state = { members: null, teamLoading: true, alumni: [] };
+  componentDidMount(){
+    this.setupReveals();
+    import('./team-data.js').then(mod => mod.fetchTeamMembers().then(members => ({ mod, members }))).then(({ mod, members }) => {
+      const { current, alumni } = mod.splitCurrentAndAlumni(members);
+      this.setState({ members: current, groups: mod.groupByPosition(current), alumni, teamLoading: false });
+    }).catch(err => { console.error('Team feed error:', err); this.setState({ members: [], groups: [], alumni: [], teamLoading: false }); });
+  }
   componentDidUpdate(){ if (this._observeReveals) this._observeReveals(); }
   componentWillUnmount(){ if (this._revIO) this._revIO.disconnect(); }
   setupReveals(){
@@ -135,47 +164,26 @@ class Component extends DCLogic {
     return {
       emailHref: 'mailto:' + 'ude.ainigriv@effilc'.split('').reverse().join(''),
       onImgErr: (e) => { e.currentTarget.style.display = 'none'; },
-      groups: [
-        {
-          title: 'Lab Manager',
-          members: [
-            { name: 'Matt Loftus', role: 'Lab Manager', initials: 'ML', avatarBg: orange, img: 'images/matt-loftus.jpg', bio: 'Matt studies the mechanisms of Polycomb silencing in HSV latency and the role of a viral non-coding RNA.' }
-          ]
-        },
-        {
-          title: 'Technical Assistants',
-          members: [
-            { name: 'Christian J. Sanchez', role: 'Technical Assistant', initials: 'CS', avatarBg: orange, img: 'images/christian-sanchez.jpg', bio: '' }
-          ]
-        },
-        {
-          title: 'Graduate Students',
-          members: [
-            { name: 'Zoe Reich', role: 'Graduate Student', initials: 'ZR', avatarBg: navy, img: 'images/zoe-reich.jpg', bio: '' },
-            { name: 'Anne-Fluer Winter', role: 'Graduate Student', initials: 'AW', avatarBg: navy, img: 'images/annefluer-winter.jpg', bio: '' },
-            { name: 'James Boehlke', role: 'Graduate Student', initials: 'JB', avatarBg: navy, img: 'images/james-boehlke.jpg', bio: '' }
-          ]
-        },
-        {
-          title: 'Postdoctoral Research Fellows',
-          members: [
-            { name: 'Patryk Krakowiak', role: 'Postdoctoral Fellow', initials: 'PK', avatarBg: navy, img: 'images/patryk-krakowiak.jpg', bio: 'Patryk investigates cell-type-specific responses to HSV infection and how HSV-1 co-opts host signaling pathways for reactivation.' },
-            { name: 'Chandra Shekar Misra', role: 'Postdoctoral Fellow', initials: 'CM', avatarBg: navy, img: 'images/chandra-misra.jpg', bio: '' },
-            { name: 'Kristina Delgado', role: 'Postdoctoral Fellow', initials: 'KD', avatarBg: navy, img: 'images/kristina-delgado.jpg', bio: '' },
-            { name: 'Randall Schirra', role: 'Postdoctoral Fellow', initials: 'RS', avatarBg: navy, img: 'images/randall-schirra.jpg', bio: '' }
-          ]
-        }
-      ],
-      alumni: [
-        { years: '2019–2025', name: 'Sara Dochnal, PhD', note: 'Graduate student then postdoctoral fellow; chromatin-based regulation of HSV reactivation.', href: 'https://www.linkedin.com/in/sara-dochnal-phd-966b12144/' },
-        { years: '2021–2025', name: 'Abby Whitford', note: 'Graduate student; epigenetics of HSV latency.', href: 'https://www.linkedin.com/in/abigail-whitford/' },
-        { years: '2018–2024', name: 'Alison Francois', note: 'Graduate student; facultative heterochromatin in HSV latency.', href: 'https://www.linkedin.com/in/alisonfrancois/' },
-        { years: '2022–2025', name: 'Matthew Flores', note: 'Research technician; immune signaling in HSV latency and reactivation.', href: 'https://www.linkedin.com/in/matthew-f-3a308111a/' },
-        { years: '2019–2023', name: 'Sean Cuddy', note: 'Graduate student. Now a consultant at Boston Consulting Group.' },
-        { years: '2018–2019', name: 'Aleksandra Babnis', note: 'Visiting graduate student. Now a PhD student at the IMPRS for Molecular Life Sciences, Munich.' },
-        { years: '2017–2019', name: 'Austin Schinlever', note: 'Lab technician (HSV reactivation & neuronal hyperexcitability). Now a graduate student at NYU.' },
-        { years: '2018–2021', name: 'Jon Suzich', note: "The lab's first graduate student (F30, UVA Wagner Fellowship). Now in the UVA MSTP." }
-      ].map(a => ({ ...a, href: a.href || '', noLink: !a.href }))
+      teamLoading: this.state.teamLoading,
+      teamEmpty: !this.state.teamLoading && !(this.state.groups && this.state.groups.length),
+      teamSkeletons: [1, 2, 3],
+      groups: (this.state.groups || []).map(g => ({
+        ...g,
+        members: g.members.map(m => ({
+          ...m,
+          imgStyle: m.img
+            ? ('position:absolute;inset:0;background:center/cover no-repeat url("' + m.img + '")')
+            : 'display:none'
+        }))
+      })),
+      alumni: (this.state.alumni || []).map(a => ({
+        ...a,
+        href: a.href || '',
+        noLink: !a.href,
+        photoStyle: a.img
+          ? ('width:40px;height:40px;border-radius:50%;background:center/cover no-repeat url("' + a.img + '")')
+          : 'display:none'
+      }))
     };
   }
 }

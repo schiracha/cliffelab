@@ -1,0 +1,6 @@
+Name: "Sean Cuddy"
+Position: "Graduate Student"
+Description: "Graduate student. Now a consultant at Boston Consulting Group."
+Start Year: "2019"
+End Year: "2023"
+[End]

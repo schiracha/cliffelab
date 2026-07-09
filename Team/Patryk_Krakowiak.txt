@@ -1,0 +1,6 @@
+Name: "Patryk Krakowiak"
+Position: "Postdoctoral Fellow"
+Description: "Patryk investigates cell-type-specific responses to HSV infection and how HSV-1 co-opts host signaling pathways for reactivation."
+Start Year: ""
+End Year: "Current"
+[End]

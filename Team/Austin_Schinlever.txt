@@ -1,0 +1,6 @@
+Name: "Austin Schinlever"
+Position: "Lab Technician"
+Description: "Lab technician (HSV reactivation & neuronal hyperexcitability). Now a graduate student at NYU."
+Start Year: "2017"
+End Year: "2019"
+[End]
