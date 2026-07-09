@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact — Cliffe Lab | University of Virginia</title>
+<meta name="description" content="Contact the Cliffe Lab at the University of Virginia — Pinn Hall, Department of Microbiology, Immunology & Cancer Biology, Charlottesville, VA." />
+<link rel="icon" type="image/png" href="cliffe-lab-favicon.png" />
+<link rel="apple-touch-icon" href="cliffe-lab-favicon.png" />
+<style>
+  :root{
+    --navy:#232D4B;--navy-2:#1a2338;--orange:#E57200;--orange-soft:#f59331;
+    --ink:#1b2233;--slate:#5b6478;--mist:#eef1f7;--paper:#ffffff;--line:#e2e7f0;--teal:#2bb3b3;
+    --radius:18px;--shadow:0 10px 40px rgba(35,45,75,.10);--shadow-lg:0 24px 70px rgba(35,45,75,.16);
+    --maxw:1160px;--ease:cubic-bezier(.16,.84,.44,1);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+  .eyebrow{text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;font-weight:700;color:var(--orange);margin:0 0 14px}
+  h1,h2,h3{line-height:1.15;margin:0;letter-spacing:-.02em}
+
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.86);backdrop-filter:saturate(140%) blur(14px);border-bottom:1px solid transparent;transition:border-color .3s var(--ease),box-shadow .3s var(--ease)}
+  header.scrolled{border-color:var(--line);box-shadow:0 4px 24px rgba(35,45,75,.06)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .brand{display:flex;align-items:center;gap:13px;font-weight:800;letter-spacing:-.02em;font-size:1.16rem;color:var(--navy)}
+  .brand-logo{height:58px;width:auto;display:block}
+  .brand-fallback{display:none;align-items:center;gap:13px}
+  .brand .sub{display:block;font-size:.66rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--slate)}
+  .navlinks{display:flex;gap:30px;align-items:center;font-weight:600;font-size:.94rem}
+  .navlinks a{color:var(--slate);transition:color .2s}
+  .navlinks a:hover,.navlinks a.active{color:var(--navy)}
+  .navlinks a.active{color:var(--orange)}
+  .navlinks .cta{background:var(--navy);color:#fff;padding:10px 20px;border-radius:100px;transition:transform .2s var(--ease),background .2s}
+  .navlinks .cta:hover{background:var(--orange);color:#fff;transform:translateY(-1px)}
+  .burger{display:none;background:none;border:0;cursor:pointer;padding:8px}
+  .burger span{display:block;width:24px;height:2px;background:var(--navy);margin:5px 0;transition:.3s}
+
+  .page-hero{position:relative;padding:76px 0 44px;overflow:hidden;background:radial-gradient(900px 420px at 82% -10%,rgba(43,179,179,.12),transparent 60%),radial-gradient(760px 380px at 8% 10%,rgba(229,114,0,.10),transparent 55%),linear-gradient(180deg,#fbfcfe,#f3f6fb)}
+  .page-hero h1{font-size:clamp(2.1rem,4vw,3rem);color:var(--navy);font-weight:800}
+  .page-hero p{color:var(--slate);font-size:1.14rem;max-width:60ch;margin:18px 0 0}
+  .crumbs{font-size:.86rem;color:var(--slate);margin-bottom:18px}
+  .crumbs a:hover{color:var(--orange)}
+
+  main{padding:56px 0 90px}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+  .card{background:linear-gradient(180deg,#fff,#fbfcfe);border:1px solid var(--line);border-radius:var(--radius);padding:30px;box-shadow:var(--shadow);margin-bottom:24px}
+  .card h2{font-size:1.15rem;color:var(--navy);margin-bottom:16px;display:flex;align-items:center;gap:11px}
+  .card h2 .ic{width:34px;height:34px;border-radius:10px;background:rgba(229,114,0,.12);display:grid;place-items:center;flex:0 0 auto}
+  .row{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px;font-size:.95rem}
+  .row:last-child{margin-bottom:0}
+  .row .k{color:var(--slate);min-width:74px;font-weight:600;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em;padding-top:2px}
+  .row a{color:var(--navy);font-weight:600}
+  .row a:hover{color:var(--orange)}
+  address{font-style:normal;color:var(--ink);line-height:1.7}
+  .map{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);height:100%;min-height:420px}
+  .map iframe{width:100%;height:100%;min-height:420px;border:0;display:block}
+  .pi-line{font-weight:700;color:var(--navy);font-size:1.05rem;margin-bottom:2px}
+  .quick{display:flex;gap:14px;flex-wrap:wrap;margin-top:6px}
+  .chip{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:.88rem;color:var(--navy);background:#fff;border:1px solid var(--line);padding:11px 18px;border-radius:100px;box-shadow:var(--shadow);transition:transform .2s var(--ease),border-color .2s}
+  .chip:hover{transform:translateY(-2px);border-color:var(--orange)}
+
+  footer{background:#12182a;color:#9aa3ba;padding:54px 0 40px}
+  .foot{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-start}
+  .foot .brand{color:#fff}.foot .brand .sub{color:#7f89a3}
+  .foot-cols{display:flex;gap:60px;flex-wrap:wrap}
+  .foot-cols h4{color:#fff;font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;margin:0 0 14px}
+  .foot-cols a{display:block;color:#9aa3ba;font-size:.92rem;margin-bottom:9px;transition:color .2s}
+  .foot-cols a:hover{color:var(--orange-soft)}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,.08);margin-top:40px;padding-top:24px;font-size:.84rem;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+  @media (max-width:940px){
+    .navlinks{display:none}.burger{display:block}
+    .navlinks.open{display:flex;position:absolute;top:74px;left:0;right:0;flex-direction:column;background:#fff;padding:22px 26px;gap:18px;border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
+    .contact-grid{grid-template-columns:1fr}
+    .map{min-height:340px}
+  }
+</style>
+</head>
+<body>
+
+<header id="top">
+  <div class="wrap nav">
+    <a class="brand" href="index.html" aria-label="Cliffe Lab home">
+      <img class="brand-logo" src="cliffe-lab-logo.png" alt="Cliffe Lab"
+           onerror="this.remove();var f=document.getElementById('brandFallback');if(f)f.style.display='flex';">
+      <span id="brandFallback" class="brand-fallback">
+        <svg width="42" height="42" viewBox="0 0 42 42" fill="none" aria-hidden="true">
+          <rect width="42" height="42" rx="11" fill="#232D4B"/>
+          <path d="M13 10c0 6 16 6 16 12s-16 6-16 12" stroke="#E57200" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M29 10c0 6-16 6-16 12s16 6 16 12" stroke="#2bb3b3" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+        <span>Cliffe Lab<span class="sub">University of Virginia · MIC</span></span>
+      </span>
+    </a>
+    <nav class="navlinks" id="menu">
+      <a href="index.html#focus">Research</a>
+      <a href="publications.html">Publications</a>
+      <a href="index.html#news">News</a>
+      <a href="people.html">Team</a>
+      <a href="contact.html" class="active">Contact</a>
+      <a class="cta" href="index.html#join">Join the Lab</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="crumbs"><a href="index.html">Home</a> · Contact</div>
+    <p class="eyebrow">Get in Touch</p>
+    <h1>Contact the lab</h1>
+    <p>We're based at the University of Virginia in Charlottesville. Reach out about research, collaborations, or joining the lab.</p>
+    <div class="quick">
+      <a class="chip email-link" href="#" data-rev="ude.ainigriv@effilc">✉ Email Lab</a>
+      <a class="chip" href="tel:+14349247779">☎ Lab · (434) 924-7779</a>
+      <a class="chip" href="tel:+14349247780">☎ Office · (434) 924-7780</a>
+    </div>
+  </div>
+</section>
+
+<main>
+  <div class="wrap">
+    <div class="contact-grid">
+      <div>
+        <div class="card reveal">
+          <h2><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 12a4 4 0 100-8 4 4 0 000 8z" stroke="#E57200" stroke-width="2"/><path d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7" stroke="#E57200" stroke-width="2" stroke-linecap="round"/></svg></span>Principal Investigator</h2>
+          <div class="pi-line">Anna Cliffe, PhD</div>
+          <div style="color:var(--slate);font-size:.92rem;margin-bottom:14px">Associate Professor · Microbiology, Immunology &amp; Cancer Biology</div>
+          <div class="row"><span class="k">Office</span><a href="tel:+14349247780">(434) 924-7780</a></div>
+          <div class="row"><span class="k">Lab</span><a href="tel:+14349247779">(434) 924-7779</a></div>
+          <a class="chip email-link" href="#" data-rev="ude.ainigriv@effilc" style="margin-top:16px">✉ Email Anna</a>
+        </div>
+
+        <div class="card reveal">
+          <h2><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="#E57200" stroke-width="2"/><path d="M4 7l8 6 8-6" stroke="#E57200" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Mailing Address</h2>
+          <address>
+            <strong>Anna Cliffe, PhD</strong><br>
+            Department of Microbiology, Immunology, and Cancer Biology<br>
+            University of Virginia<br>
+            PO Box 800734<br>
+            Charlottesville, VA 22908
+          </address>
+        </div>
+
+        <div class="card reveal">
+          <h2><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 12h16M12 4v16" stroke="#E57200" stroke-width="2" stroke-linecap="round"/></svg></span>Department &amp; Admissions</h2>
+          <div class="quick">
+            <a class="chip" href="https://med.virginia.edu/mic/" target="_blank" rel="noopener">UVA MIC Dept</a>
+            <a class="chip" href="https://med.virginia.edu/bims/prospective-students/apply-now/" target="_blank" rel="noopener">BIMS — Apply</a>
+            <a class="chip" href="https://med.virginia.edu/cliffe/" target="_blank" rel="noopener">Lab @ UVA</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="map reveal">
+        <iframe title="Map to Pinn Hall, University of Virginia"
+          src="https://www.google.com/maps?q=Pinn%20Hall,%201340%20Jefferson%20Park%20Ave,%20Charlottesville,%20VA%2022908&output=embed"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="brand" href="index.html">
+          <svg width="38" height="38" viewBox="0 0 42 42" fill="none" aria-hidden="true">
+            <rect width="42" height="42" rx="11" fill="#E57200"/>
+            <path d="M13 10c0 6 16 6 16 12s-16 6-16 12" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M29 10c0 6-16 6-16 12s16 6 16 12" stroke="#232D4B" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+          <span>Cliffe Lab<span class="sub">University of Virginia</span></span>
+        </a>
+        <p style="max-width:34ch;margin-top:16px;font-size:.9rem">Department of Microbiology, Immunology &amp; Cancer Biology, UVA School of Medicine, Charlottesville, VA.</p>
+      </div>
+      <div class="foot-cols">
+        <div>
+          <h4>Explore</h4>
+          <a href="index.html#focus">Research</a>
+          <a href="publications.html">Publications</a>
+          <a href="index.html#news">Lab News</a>
+          <a href="people.html">Team</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div>
+          <h4>University</h4>
+          <a href="https://med.virginia.edu/mic/" target="_blank" rel="noopener">UVA MIC Department</a>
+          <a href="https://med.virginia.edu/bims/prospective-students/apply-now/" target="_blank" rel="noopener">BIMS — Apply</a>
+          <a href="https://med.virginia.edu/cliffe/" target="_blank" rel="noopener">Lab @ UVA</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="yr"></span> Cliffe Lab · University of Virginia</span>
+      <span>Charlottesville, Virginia</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var header=document.getElementById('top');
+  var onScroll=function(){header.classList.toggle('scrolled',window.scrollY>8);};
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  var burger=document.getElementById('burger'),menu=document.getElementById('menu');
+  burger.addEventListener('click',function(){menu.classList.toggle('open');});
+  menu.addEventListener('click',function(e){if(e.target.tagName==='A')menu.classList.remove('open');});
+  var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -5% 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+  document.getElementById('yr').textContent=new Date().getFullYear();
+
+  // Email obfuscation: address is stored reversed and only assembled in the browser,
+  // so static text scanners never see a plaintext address in the HTML.
+  Array.prototype.forEach.call(document.querySelectorAll('.email-link'), function(el){
+    var addr=(el.getAttribute('data-rev')||'').split('').reverse().join('');
+    el.setAttribute('href','mailto:'+addr);
+    if(el.getAttribute('data-show')) el.textContent=addr;
+  });
+})();
+</script>
+</body>
+</html>

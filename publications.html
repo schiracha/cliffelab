@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Publications — Cliffe Lab | University of Virginia</title>
+<meta name="description" content="Publications from the Cliffe Lab at the University of Virginia — herpes simplex virus latency, reactivation, and neuronal chromatin. Updated live from Europe PMC." />
+<link rel="icon" type="image/png" href="cliffe-lab-favicon.png" />
+<link rel="apple-touch-icon" href="cliffe-lab-favicon.png" />
+<style>
+  :root{
+    --navy:#232D4B;--navy-2:#1a2338;--orange:#E57200;--orange-soft:#f59331;
+    --ink:#1b2233;--slate:#5b6478;--mist:#eef1f7;--paper:#ffffff;--line:#e2e7f0;--teal:#2bb3b3;
+    --radius:18px;--shadow:0 10px 40px rgba(35,45,75,.10);--shadow-lg:0 24px 70px rgba(35,45,75,.16);
+    --maxw:1160px;--ease:cubic-bezier(.16,.84,.44,1);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+  .eyebrow{text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;font-weight:700;color:var(--orange);margin:0 0 14px}
+  h1,h2,h3{line-height:1.15;margin:0;letter-spacing:-.02em}
+
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.86);backdrop-filter:saturate(140%) blur(14px);border-bottom:1px solid transparent;transition:border-color .3s var(--ease),box-shadow .3s var(--ease)}
+  header.scrolled{border-color:var(--line);box-shadow:0 4px 24px rgba(35,45,75,.06)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .brand{display:flex;align-items:center;gap:13px;font-weight:800;letter-spacing:-.02em;font-size:1.16rem;color:var(--navy)}
+  .brand-logo{height:58px;width:auto;display:block}
+  .brand-fallback{display:none;align-items:center;gap:13px}
+  .brand .sub{display:block;font-size:.66rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--slate)}
+  .navlinks{display:flex;gap:30px;align-items:center;font-weight:600;font-size:.94rem}
+  .navlinks a{color:var(--slate);transition:color .2s}
+  .navlinks a:hover,.navlinks a.active{color:var(--navy)}
+  .navlinks a.active{color:var(--orange)}
+  .navlinks .cta{background:var(--navy);color:#fff;padding:10px 20px;border-radius:100px;transition:transform .2s var(--ease),background .2s}
+  .navlinks .cta:hover{background:var(--orange);color:#fff;transform:translateY(-1px)}
+  .burger{display:none;background:none;border:0;cursor:pointer;padding:8px}
+  .burger span{display:block;width:24px;height:2px;background:var(--navy);margin:5px 0;transition:.3s}
+
+  .page-hero{position:relative;padding:76px 0 44px;overflow:hidden;background:radial-gradient(900px 420px at 82% -10%,rgba(43,179,179,.12),transparent 60%),radial-gradient(760px 380px at 8% 10%,rgba(229,114,0,.10),transparent 55%),linear-gradient(180deg,#fbfcfe,#f3f6fb)}
+  .page-hero h1{font-size:clamp(2.1rem,4vw,3rem);color:var(--navy);font-weight:800}
+  .page-hero p{color:var(--slate);font-size:1.14rem;max-width:60ch;margin:18px 0 0}
+  .crumbs{font-size:.86rem;color:var(--slate);margin-bottom:18px}
+  .crumbs a:hover{color:var(--orange)}
+  .live-tag{display:inline-flex;align-items:center;gap:8px;font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--teal);background:rgba(43,179,179,.1);padding:7px 14px;border-radius:100px;margin-top:22px}
+  .live-dot{width:8px;height:8px;border-radius:50%;background:var(--teal);animation:pulse 1.8s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(43,179,179,.5)}70%{box-shadow:0 0 0 9px rgba(43,179,179,0)}100%{box-shadow:0 0 0 0 rgba(43,179,179,0)}}
+
+  main{padding:50px 0 90px}
+  .year-group{margin-bottom:46px}
+  .year-head{display:flex;align-items:center;gap:16px;margin-bottom:22px}
+  .year-head h2{font-size:1.4rem;color:var(--navy);font-weight:800}
+  .year-head .rule{height:1px;background:var(--line);flex:1}
+  .year-head .count{font-size:.8rem;color:var(--slate);font-weight:600}
+
+  .plist{display:grid;gap:18px}
+  .pcard{display:grid;grid-template-columns:132px 1fr;background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:transform .25s var(--ease),box-shadow .25s}
+  .pcard:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+  .pthumb{position:relative;min-height:150px;background:var(--navy);overflow:hidden}
+  .pthumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .pbody{padding:20px 24px;display:flex;flex-direction:column}
+  .pjournal{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--orange);margin-bottom:7px}
+  .pjournal .yr{color:var(--slate)}
+  .ppr-badge{display:inline-block;font-size:.62rem;font-weight:800;letter-spacing:.06em;color:#fff;background:var(--teal);padding:2px 8px;border-radius:100px;margin-left:8px;vertical-align:middle;text-transform:uppercase}
+  .pcard h3{font-size:1.08rem;line-height:1.32;color:var(--navy);margin-bottom:8px}
+  .pcard h3 a:hover{color:var(--orange)}
+  .pauth{font-size:.85rem;color:var(--slate);margin-bottom:10px}
+  .pauth b{color:var(--ink)}
+  .pabs{font-size:.89rem;color:#4a5265;margin:0 0 13px;flex:1}
+  .plinks{display:flex;gap:16px;flex-wrap:wrap}
+  .plink{font-size:.84rem;font-weight:700;color:var(--navy);display:inline-flex;align-items:center;gap:6px}
+  .plink:hover{color:var(--orange)}
+  .skeleton .sk{background:linear-gradient(90deg,#eef1f7 25%,#e3e8f1 37%,#eef1f7 63%);background-size:400% 100%;animation:sh 1.4s infinite;border-radius:6px}
+  @keyframes sh{0%{background-position:100% 0}100%{background-position:-100% 0}}
+  .perror{text-align:center;padding:40px;color:var(--slate);background:#fff;border:1px dashed var(--line);border-radius:var(--radius)}
+  .allsearch{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:.95rem;padding:13px 24px;border-radius:100px;transition:transform .2s var(--ease),box-shadow .25s,background .2s;border:0;cursor:pointer}
+  .btn-ghost{background:#fff;color:var(--navy);box-shadow:var(--shadow)}
+  .btn-ghost:hover{transform:translateY(-2px)}
+
+  footer{background:#12182a;color:#9aa3ba;padding:54px 0 40px}
+  .foot{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-start}
+  .foot .brand{color:#fff}.foot .brand .sub{color:#7f89a3}
+  .foot-cols{display:flex;gap:60px;flex-wrap:wrap}
+  .foot-cols h4{color:#fff;font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;margin:0 0 14px}
+  .foot-cols a{display:block;color:#9aa3ba;font-size:.92rem;margin-bottom:9px;transition:color .2s}
+  .foot-cols a:hover{color:var(--orange-soft)}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,.08);margin-top:40px;padding-top:24px;font-size:.84rem;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+  @media (max-width:940px){
+    .navlinks{display:none}.burger{display:block}
+    .navlinks.open{display:flex;position:absolute;top:74px;left:0;right:0;flex-direction:column;background:#fff;padding:22px 26px;gap:18px;border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
+  }
+  @media (max-width:560px){.pcard{grid-template-columns:1fr}.pthumb{min-height:150px}}
+</style>
+</head>
+<body>
+
+<header id="top">
+  <div class="wrap nav">
+    <a class="brand" href="index.html" aria-label="Cliffe Lab home">
+      <img class="brand-logo" src="cliffe-lab-logo.png" alt="Cliffe Lab"
+           onerror="this.remove();var f=document.getElementById('brandFallback');if(f)f.style.display='flex';">
+      <span id="brandFallback" class="brand-fallback">
+        <svg width="42" height="42" viewBox="0 0 42 42" fill="none" aria-hidden="true">
+          <rect width="42" height="42" rx="11" fill="#232D4B"/>
+          <path d="M13 10c0 6 16 6 16 12s-16 6-16 12" stroke="#E57200" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M29 10c0 6-16 6-16 12s16 6 16 12" stroke="#2bb3b3" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+        <span>Cliffe Lab<span class="sub">University of Virginia · MIC</span></span>
+      </span>
+    </a>
+    <nav class="navlinks" id="menu">
+      <a href="index.html#focus">Research</a>
+      <a href="publications.html" class="active">Publications</a>
+      <a href="index.html#news">News</a>
+      <a href="people.html">Team</a>
+      <a href="contact.html">Contact</a>
+      <a class="cta" href="index.html#join">Join the Lab</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="crumbs"><a href="index.html">Home</a> · Publications</div>
+    <p class="eyebrow">Publications &amp; Preprints</p>
+    <h1>Publications</h1>
+    <p>Our published work on herpes simplex virus latency, reactivation, and the chromatin and immune biology of infected neurons.</p>
+    <span class="live-tag"><span class="live-dot"></span> <span id="liveCount">Loading live from Europe PMC…</span></span>
+  </div>
+</section>
+
+<main>
+  <div class="wrap">
+    <div id="pubList" aria-live="polite"></div>
+    <div class="allsearch">
+      <a class="btn btn-ghost" href="https://europepmc.org/search?query=AUTH%3A%22Cliffe%20AR%22%20AND%20AFF%3AVirginia" target="_blank" rel="noopener">
+        Search on Europe PMC
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#232D4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="btn btn-ghost" href="https://pubmed.ncbi.nlm.nih.gov/?term=Cliffe+AR%5BAuthor%5D+AND+Virginia%5BAffiliation%5D&sort=date" target="_blank" rel="noopener">
+        View on PubMed
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#232D4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="brand" href="index.html">
+          <svg width="38" height="38" viewBox="0 0 42 42" fill="none" aria-hidden="true">
+            <rect width="42" height="42" rx="11" fill="#E57200"/>
+            <path d="M13 10c0 6 16 6 16 12s-16 6-16 12" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M29 10c0 6-16 6-16 12s16 6 16 12" stroke="#232D4B" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+          <span>Cliffe Lab<span class="sub">University of Virginia</span></span>
+        </a>
+        <p style="max-width:34ch;margin-top:16px;font-size:.9rem">Department of Microbiology, Immunology &amp; Cancer Biology, UVA School of Medicine, Charlottesville, VA.</p>
+      </div>
+      <div class="foot-cols">
+        <div>
+          <h4>Explore</h4>
+          <a href="index.html#focus">Research</a>
+          <a href="publications.html">Publications</a>
+          <a href="index.html#news">Lab News</a>
+          <a href="people.html">Team</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div>
+          <h4>University</h4>
+          <a href="https://med.virginia.edu/mic/" target="_blank" rel="noopener">UVA MIC Department</a>
+          <a href="https://med.virginia.edu/bims/prospective-students/apply-now/" target="_blank" rel="noopener">BIMS — Apply</a>
+          <a href="https://med.virginia.edu/cliffe/" target="_blank" rel="noopener">Lab @ UVA</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="yr"></span> Cliffe Lab · University of Virginia</span>
+      <span>Publications feed via Europe PMC</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var header=document.getElementById('top');
+  var onScroll=function(){header.classList.toggle('scrolled',window.scrollY>8);};
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  var burger=document.getElementById('burger'),menu=document.getElementById('menu');
+  burger.addEventListener('click',function(){menu.classList.toggle('open');});
+  menu.addEventListener('click',function(e){if(e.target.tagName==='A')menu.classList.remove('open');});
+  document.getElementById('yr').textContent=new Date().getFullYear();
+
+  var revealIO=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');revealIO.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -5% 0px'});
+
+  /* ===== live publications (full list, grouped by year) ===== */
+  var LIST=document.getElementById('pubList');
+  var EPMC='https://www.ebi.ac.uk/europepmc/webservices/rest/';
+  var QUERY='AUTH:"Cliffe AR" AND (AFF:Virginia OR SRC:PPR)';
+
+  function hash(s){s=String(s);var h=0;for(var i=0;i<s.length;i++){h=(h<<5)-h+s.charCodeAt(i);h|=0;}return h;}
+  function mul(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+  function placeholder(seed){
+    var pal=[['#232D4B','#2bb3b3'],['#233a4b','#E57200'],['#2a2350','#f59331'],['#12303a','#2bb3b3']];
+    var p=pal[Math.abs(hash(seed))%pal.length];var r=mul(Math.abs(hash(seed)));var dots='';
+    for(var i=0;i<7;i++){dots+='<circle cx="'+(20+r()*110)+'" cy="'+(20+r()*130)+'" r="'+(2+r()*3)+'" fill="#fff" opacity="'+(0.12+r()*0.2).toFixed(2)+'"/>';}
+    var svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 170" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="'+p[0]+'"/><stop offset="1" stop-color="'+p[1]+'"/></linearGradient></defs><rect width="132" height="170" fill="url(#g)"/><path d="M30 18c0 26 72 26 72 52s-72 26-72 52" stroke="#fff" stroke-opacity=".22" stroke-width="2.2" fill="none"/><path d="M102 18c0 26-72 26-72 52s72 26 72 52" stroke="#fff" stroke-opacity=".22" stroke-width="2.2" fill="none"/>'+dots+'</svg>';
+    return 'data:image/svg+xml;utf8,'+encodeURIComponent(svg);
+  }
+  function fmtAuthors(str){
+    if(!str) return '';
+    var names=str.replace(/\.\s*$/,'').split(/,\s*/);var out;
+    if(names.length<=6){out=names.join(', ');}
+    else{var head=names.slice(0,5);var c=names.filter(function(n){return /^Cliffe /.test(n);}).pop();
+      out=(c&&head.indexOf(c)===-1)?head.join(', ')+', …, '+c:head.join(', ')+', et al.';}
+    return out.replace(/(Cliffe [A-Z]{1,3})/g,'<b>$1</b>');
+  }
+  function words(t,n){var w=(t||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().split(' ');return w.length>n?w.slice(0,n).join(' ')+'…':w.join(' ');}
+  function esc(s){return String(s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+  /* lazy figure loading: fetch a paper's first OA figure only when its card nears the viewport */
+  var figIO=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(!en.isIntersecting) return;
+      var el=en.target; figIO.unobserve(el);
+      var pmcid=el.getAttribute('data-pmcid'); if(!pmcid) return;
+      var id=pmcid.replace(/[^0-9A-Z]/gi,'');
+      fetch(EPMC+id+'/fullTextXML').then(function(r){return r.ok?r.text():'';}).then(function(xml){
+        var m=xml.match(/<graphic[^>]*xlink:href="([^"]+)"/i); if(!m) return;
+        var blob=m[1]; if(!/\.(jpe?g|png|gif|tif?f)$/i.test(blob)) blob+='.jpg';
+        var url='https://europepmc.org/backend/ptpmcrender.fcgi?acc='+id+'&blobtype=image&blobname='+encodeURIComponent(blob);
+        var im=el.querySelector('img'); if(!im) return;
+        var probe=new Image(); probe.onload=function(){im.src=url;}; probe.src=url;
+      }).catch(function(){});
+    });
+  },{rootMargin:'200px'});
+
+  function jget(u){return fetch(u).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();});}
+
+  function render(items){
+    // group by year (desc)
+    var groups={}, order=[];
+    items.forEach(function(it){var y=it.year||'—'; if(!groups[y]){groups[y]=[];order.push(y);} groups[y].push(it);});
+    order.sort(function(a,b){return (parseInt(b)||0)-(parseInt(a)||0);});
+    var html='';
+    order.forEach(function(y){
+      var g=groups[y];
+      html+='<div class="year-group reveal"><div class="year-head"><h2>'+esc(y)+'</h2><span class="rule"></span></div><div class="plist">';
+      g.forEach(function(p){
+        var ph=placeholder(p.pmid);
+        html+='<article class="pcard">'
+          + '<div class="pthumb" data-pmcid="'+esc(p.pmcid)+'"><img loading="lazy" src="'+ph+'" alt="Figure from '+esc(p.title)+'" onerror="this.onerror=null;this.src=\''+ph+'\'"></div>'
+          + '<div class="pbody"><div class="pjournal">'+esc(p.journal)+' <span class="yr">· '+esc(p.year)+'</span>'+(p.isPreprint?' <span class="ppr-badge">Preprint</span>':'')+'</div>'
+          + '<h3><a href="'+p.link+'" target="_blank" rel="noopener">'+esc(p.title)+'</a></h3>'
+          + '<div class="pauth">'+p.authors+'</div>'
+          + '<p class="pabs">'+esc(p.abstract)+'</p>'
+          + '<div class="plinks">'
+          +   '<a class="plink" href="'+p.link+'" target="_blank" rel="noopener">PubMed <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>'
+          +   (p.doi?'<a class="plink" href="https://doi.org/'+esc(p.doi)+'" target="_blank" rel="noopener">DOI</a>':'')
+          +   (p.pmcid?'<a class="plink" href="https://www.ncbi.nlm.nih.gov/pmc/articles/'+esc(p.pmcid)+'/" target="_blank" rel="noopener">Full text</a>':'')
+          + '</div></div></article>';
+      });
+      html+='</div></div>';
+    });
+    LIST.innerHTML=html;
+    LIST.querySelectorAll('.reveal').forEach(function(el){revealIO.observe(el);});
+    LIST.querySelectorAll('.pthumb[data-pmcid]').forEach(function(el){ if(el.getAttribute('data-pmcid')) figIO.observe(el); });
+  }
+
+  function skeleton(){
+    var s='';for(var i=0;i<5;i++){s+='<div class="pcard skeleton"><div class="pthumb sk"></div><div class="pbody"><div class="sk" style="height:12px;width:38%;margin-bottom:12px"></div><div class="sk" style="height:18px;width:88%;margin-bottom:10px"></div><div class="sk" style="height:12px;width:100%;margin-bottom:6px"></div><div class="sk" style="height:12px;width:70%"></div></div></div>';}
+    LIST.innerHTML='<div class="plist">'+s+'</div>';
+  }
+
+  function load(){
+    skeleton();
+    var url=EPMC+'search?query='+encodeURIComponent(QUERY)+'&resultType=core&format=json&pageSize=100&sort='+encodeURIComponent('P_PDATE_D desc');
+    jget(url).then(function(d){
+      var rows=(d.resultList&&d.resultList.result)||[];
+      if(!rows.length){ LIST.innerHTML='<div class="perror">No publications found right now. <a class="plink" href="https://europepmc.org/search?query=AUTH%3A%22Cliffe%20AR%22" target="_blank" rel="noopener">Search Europe PMC →</a></div>'; return; }
+      var items=rows.map(function(r){
+        var ji=(r.journalInfo&&r.journalInfo.journal)||{};
+        var link=r.pmid?'https://pubmed.ncbi.nlm.nih.gov/'+r.pmid+'/':r.doi?'https://doi.org/'+r.doi:'https://europepmc.org/article/'+(r.source||'MED')+'/'+r.id;
+        return {pmid:r.pmid||r.id,title:(r.title||'').replace(/\.$/,''),journal:ji.isoabbreviation||ji.medlineAbbreviation||ji.title||(r.source==='PPR'?'Preprint':''),
+          year:r.pubYear||'',authors:fmtAuthors(r.authorString),abstract:words(r.abstractText||'Abstract not available.',60),
+          pmcid:r.pmcid||'',doi:r.doi||'',link:link,isPreprint:r.source==='PPR'};
+      });
+      document.getElementById('liveCount').textContent=items.length+' publications · live from Europe PMC';
+      render(items);
+    }).catch(function(e){ console.error('Pub list error:',e);
+      LIST.innerHTML='<div class="perror">Publications couldn\'t load right now. <a class="plink" href="https://pubmed.ncbi.nlm.nih.gov/?term=Cliffe+AR%5BAuthor%5D+AND+Virginia%5BAffiliation%5D&sort=date" target="_blank" rel="noopener">View on PubMed →</a></div>';
+      document.getElementById('liveCount').textContent='Live from Europe PMC';
+    });
+  }
+  load();
+})();
+</script>
+</body>
+</html>
