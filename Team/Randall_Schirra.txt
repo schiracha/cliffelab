@@ -1,5 +1,5 @@
 Name: "Randall Schirra"
-Position: "Postdoctoral Fellow"
+Position: "Postdoctoral Associate"
 Description: ""
 Start Year: ""
 End Year: "Current"
