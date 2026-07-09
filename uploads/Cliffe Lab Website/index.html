@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cliffe Lab — Molecular Virology & Neuronal Latency | University of Virginia</title>
+<meta name="description" content="The Cliffe Lab at the University of Virginia studies how herpes simplex virus establishes latency in neurons and reactivates to cause disease." />
+<link rel="icon" type="image/png" href="cliffe-lab-favicon.png" />
+<link rel="apple-touch-icon" href="cliffe-lab-favicon.png" />
+<style>
+  :root{
+    --navy:#232D4B;        /* UVA Jefferson blue */
+    --navy-2:#1a2338;
+    --orange:#E57200;      /* UVA orange */
+    --orange-soft:#f59331;
+    --ink:#1b2233;
+    --slate:#5b6478;
+    --mist:#eef1f7;
+    --paper:#ffffff;
+    --line:#e2e7f0;
+    --teal:#2bb3b3;
+    --radius:18px;
+    --shadow:0 10px 40px rgba(35,45,75,.10);
+    --shadow-lg:0 24px 70px rgba(35,45,75,.16);
+    --maxw:1160px;
+    --ease:cubic-bezier(.16,.84,.44,1);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+  .eyebrow{
+    text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;font-weight:700;
+    color:var(--orange);margin:0 0 14px;
+  }
+  h1,h2,h3{line-height:1.15;margin:0;letter-spacing:-.02em}
+  section{position:relative}
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,255,255,.82);
+    backdrop-filter:saturate(140%) blur(14px);
+    border-bottom:1px solid transparent;
+    transition:border-color .3s var(--ease), box-shadow .3s var(--ease);
+  }
+  header.scrolled{border-color:var(--line);box-shadow:0 4px 24px rgba(35,45,75,.06)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .brand{display:flex;align-items:center;gap:13px;font-weight:800;letter-spacing:-.02em;font-size:1.16rem;color:var(--navy)}
+  .brand svg{flex:0 0 auto}
+  .brand-logo{height:58px;width:auto;display:block}
+  .brand-fallback{display:none;align-items:center;gap:13px}
+  .brand .sub{display:block;font-size:.66rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--slate)}
+  .navlinks{display:flex;gap:30px;align-items:center;font-weight:600;font-size:.94rem}
+  .navlinks a{color:var(--slate);transition:color .2s}
+  .navlinks a:hover{color:var(--navy)}
+  .navlinks .cta{
+    background:var(--navy);color:#fff;padding:10px 20px;border-radius:100px;
+    transition:transform .2s var(--ease),background .2s;
+  }
+  .navlinks .cta:hover{background:var(--orange);color:#fff;transform:translateY(-1px)}
+  .burger{display:none;background:none;border:0;cursor:pointer;padding:8px}
+  .burger span{display:block;width:24px;height:2px;background:var(--navy);margin:5px 0;transition:.3s}
+
+  /* ---------- TOP LOGO BANNER ---------- */
+  .top-banner{position:relative;min-height:78vh;display:grid;place-items:center;overflow:hidden;text-align:center;padding:40px 20px;
+    background:radial-gradient(1000px 500px at 80% -10%,rgba(43,179,179,.12),transparent 60%),
+      radial-gradient(820px 460px at 10% 8%,rgba(229,114,0,.10),transparent 55%),
+      linear-gradient(180deg,#ffffff,#f3f6fb)}
+  .banner-bg{position:absolute;inset:0;width:100%;height:100%;opacity:.5;pointer-events:none}
+  .banner-inner{position:relative;z-index:1;will-change:transform,opacity}
+  .banner-logo{width:min(74vw,430px);height:auto;margin:0 auto;display:block}
+  .banner-fallback{font-size:clamp(2.4rem,7vw,4rem);font-weight:800;color:var(--navy);letter-spacing:-.02em}
+  .banner-tag{margin-top:18px;color:var(--slate);font-weight:600;font-size:clamp(.85rem,1.6vw,1.05rem);letter-spacing:.02em}
+  .banner-scroll{margin-top:34px;display:inline-flex;flex-direction:column;align-items:center;gap:5px;color:var(--slate);font-size:.72rem;text-transform:uppercase;letter-spacing:.18em;font-weight:700}
+  .banner-scroll svg{color:var(--orange);animation:bob 1.8s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+  header .brand{opacity:0;transition:opacity .35s var(--ease)}
+  @media (prefers-reduced-motion:reduce){.banner-scroll svg{animation:none}header .brand{opacity:1}}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;padding:110px 0 90px;overflow:hidden;
+    background:
+      radial-gradient(1100px 520px at 82% -8%, rgba(43,179,179,.12), transparent 60%),
+      radial-gradient(900px 480px at 10% 12%, rgba(229,114,0,.10), transparent 55%),
+      linear-gradient(180deg,#fbfcfe 0%,#f3f6fb 100%);
+  }
+  .science-bg{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.55}
+  .hero .wrap{position:relative;z-index:1}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+  .hero h1{font-size:clamp(2.3rem,4.6vw,3.7rem);color:var(--navy);font-weight:800}
+  .hero h1 .hl{color:var(--orange)}
+  .hero p.lead{font-size:1.18rem;color:var(--slate);margin:22px 0 30px;max-width:33ch}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:.98rem;
+    padding:14px 26px;border-radius:100px;transition:transform .2s var(--ease),box-shadow .25s,background .2s;cursor:pointer;border:0;
+  }
+  .btn-primary{background:var(--orange);color:#fff;box-shadow:0 10px 26px rgba(229,114,0,.32)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(229,114,0,.4)}
+  .btn-ghost{background:#fff;color:var(--navy);box-shadow:var(--shadow)}
+  .btn-ghost:hover{transform:translateY(-2px)}
+  .hero-visual{position:relative;display:flex;justify-content:center}
+  .hero-card{
+    width:100%;max-width:400px;background:#fff;border-radius:26px;padding:8px;
+    box-shadow:var(--shadow-lg);border:1px solid var(--line);
+  }
+  .hero-card .inner{border-radius:20px;overflow:hidden;background:linear-gradient(160deg,var(--navy),#33406a)}
+  .hero-card svg{width:100%;height:auto;display:block}
+  .hero-fig{width:100%;height:auto;display:block;border-radius:20px}
+  .hero-cap{margin:16px 6px 0;font-size:.82rem;line-height:1.5;color:var(--slate);text-align:center;max-width:400px}
+  .float{animation:float 7s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+
+  /* ---------- FOCUS BLOCK ---------- */
+  .focus{padding:100px 0;background:var(--navy);color:#fff;position:relative;overflow:hidden}
+  .focus .grain{position:absolute;inset:0;opacity:.35;z-index:0}
+  .focus .wrap{position:relative;z-index:1}
+  .focus-head{max-width:720px;margin:0 auto 56px;text-align:center}
+  .focus-head .eyebrow{color:var(--orange-soft)}
+  .focus-head h2{font-size:clamp(1.9rem,3.4vw,2.7rem);font-weight:800}
+  .focus-head p{color:#c7cfe0;font-size:1.14rem;margin:20px auto 0;max-width:60ch}
+  .subfocus{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .sf-card{
+    background:linear-gradient(165deg,rgba(255,255,255,.09),rgba(255,255,255,.03));
+    border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);
+    padding:34px 28px;transition:transform .35s var(--ease),border-color .35s,background .35s;
+    position:relative;overflow:hidden;
+  }
+  .sf-card:hover{transform:translateY(-8px);border-color:rgba(229,114,0,.55);background:linear-gradient(165deg,rgba(255,255,255,.13),rgba(255,255,255,.04))}
+  .sf-icon{width:54px;height:54px;border-radius:14px;display:grid;place-items:center;background:rgba(229,114,0,.16);margin-bottom:20px}
+  .sf-card h3{font-size:1.22rem;margin-bottom:12px}
+  .sf-card p{color:#c2cadd;font-size:.98rem;margin:0}
+  .sf-num{position:absolute;top:16px;right:22px;font-size:3.2rem;font-weight:800;color:rgba(255,255,255,.06);line-height:1}
+
+  /* ---------- PUBLICATIONS ---------- */
+  .pubs{padding:100px 0;background:linear-gradient(180deg,#fff, #f6f8fc)}
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:44px}
+  .sec-head h2{font-size:clamp(1.8rem,3.2vw,2.5rem);color:var(--navy);font-weight:800}
+  .sec-head p{color:var(--slate);margin:10px 0 0;max-width:52ch}
+  .live-tag{display:inline-flex;align-items:center;gap:8px;font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--teal);background:rgba(43,179,179,.1);padding:7px 14px;border-radius:100px}
+  .live-dot{width:8px;height:8px;border-radius:50%;background:var(--teal);animation:pulse 1.8s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(43,179,179,.5)}70%{box-shadow:0 0 0 9px rgba(43,179,179,0)}100%{box-shadow:0 0 0 0 rgba(43,179,179,0)}}
+  .pub-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px}
+  .pub-card{
+    display:grid;grid-template-columns:150px 1fr;background:#fff;border:1px solid var(--line);
+    border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);
+    transition:transform .3s var(--ease),box-shadow .3s;
+  }
+  .pub-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+  .pub-thumb{position:relative;min-height:190px;background:var(--navy);overflow:hidden}
+  .pub-thumb img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+  .pub-body{padding:22px 24px;display:flex;flex-direction:column}
+  .pub-journal{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--orange);margin-bottom:8px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .pub-journal .yr{color:var(--slate)}
+  .pub-card h3{font-size:1.08rem;line-height:1.3;color:var(--navy);margin-bottom:9px}
+  .pub-card h3 a:hover{color:var(--orange)}
+  .pub-authors{font-size:.85rem;color:var(--slate);margin-bottom:11px}
+  .pub-authors b{color:var(--ink)}
+  .pub-abs{font-size:.9rem;color:#4a5265;margin:0 0 14px;flex:1}
+  .pub-link{font-size:.85rem;font-weight:700;color:var(--navy);display:inline-flex;align-items:center;gap:6px;align-self:flex-start}
+  .pub-link:hover{color:var(--orange)}
+  .pub-link svg{transition:transform .2s}
+  .pub-link:hover svg{transform:translateX(3px)}
+  .skeleton .sk{background:linear-gradient(90deg,#eef1f7 25%,#e3e8f1 37%,#eef1f7 63%);background-size:400% 100%;animation:sh 1.4s infinite;border-radius:6px}
+  @keyframes sh{0%{background-position:100% 0}100%{background-position:-100% 0}}
+  .pub-more{text-align:center;margin-top:44px}
+  .pub-error{grid-column:1/-1;text-align:center;padding:40px;color:var(--slate);background:#fff;border:1px dashed var(--line);border-radius:var(--radius)}
+
+  /* ---------- NEWS ---------- */
+  .news{padding:100px 0;background:#fff}
+  .news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .news-item{border:1px solid var(--line);border-radius:var(--radius);padding:30px 28px;transition:transform .3s var(--ease),box-shadow .3s;background:linear-gradient(180deg,#fff,#fbfcfe)}
+  .news-item:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+  .news-date{font-size:.78rem;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.08em}
+  .news-item h3{font-size:1.14rem;color:var(--navy);margin:12px 0 10px}
+  .news-item p{font-size:.95rem;color:var(--slate);margin:0}
+  .news-tag{display:inline-block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:4px 11px;border-radius:100px;background:var(--mist);color:var(--navy);margin-bottom:16px}
+
+  /* ---------- CTA / LINKS ---------- */
+  .connect{padding:96px 0;background:
+     radial-gradient(700px 380px at 85% 0%, rgba(43,179,179,.14), transparent 60%),
+     var(--navy-2);color:#fff;position:relative;overflow:hidden}
+  .connect .wrap{position:relative;z-index:1}
+  .connect h2{font-size:clamp(1.8rem,3.2vw,2.5rem);font-weight:800;text-align:center;margin-bottom:14px}
+  .connect .sub{text-align:center;color:#c2cadd;max-width:56ch;margin:0 auto 48px;font-size:1.1rem}
+  .link-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:920px;margin:0 auto}
+  .link-card{
+    background:linear-gradient(165deg,rgba(255,255,255,.08),rgba(255,255,255,.03));
+    border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);padding:30px 26px;
+    transition:transform .3s var(--ease),border-color .3s,background .3s;display:block;
+  }
+  .link-card:hover{transform:translateY(-7px);border-color:var(--orange);background:linear-gradient(165deg,rgba(229,114,0,.16),rgba(255,255,255,.03))}
+  .link-card .k{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange-soft);margin-bottom:12px}
+  .link-card h3{font-size:1.22rem;margin-bottom:10px}
+  .link-card p{color:#c2cadd;font-size:.94rem;margin:0 0 16px}
+  .link-card .go{font-weight:700;font-size:.9rem;display:inline-flex;gap:7px;align-items:center;color:#fff}
+  .link-card:hover .go{color:var(--orange-soft)}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:#12182a;color:#9aa3ba;padding:54px 0 40px}
+  .foot{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-start}
+  .foot .brand{color:#fff}
+  .foot .brand .sub{color:#7f89a3}
+  .foot-cols{display:flex;gap:60px;flex-wrap:wrap}
+  .foot-cols h4{color:#fff;font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;margin:0 0 14px}
+  .foot-cols a{display:block;color:#9aa3ba;font-size:.92rem;margin-bottom:9px;transition:color .2s}
+  .foot-cols a:hover{color:var(--orange-soft)}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,.08);margin-top:40px;padding-top:24px;font-size:.84rem;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+  /* ---------- SCROLL REVEAL ---------- */
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+    .float{animation:none}
+    html{scroll-behavior:auto}
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:940px){
+    .hero-grid{grid-template-columns:1fr;gap:40px}
+    .hero p.lead{max-width:none}
+    .subfocus,.news-grid,.link-grid{grid-template-columns:1fr}
+    .pub-grid{grid-template-columns:1fr}
+    .navlinks{display:none}
+    .burger{display:block}
+    .navlinks.open{display:flex;position:absolute;top:74px;left:0;right:0;flex-direction:column;background:#fff;padding:22px 26px;gap:18px;border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
+  }
+  @media (max-width:560px){
+    .pub-card{grid-template-columns:1fr}
+    .pub-thumb{min-height:150px}
+    .foot-cols{gap:34px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header id="top">
+  <div class="wrap nav">
+    <a class="brand" id="brandLink" href="#top" aria-label="Cliffe Lab home">
+      <!-- Real lab logo. Save the navy/orange PNG here as cliffe-lab-logo.png. -->
+      <img class="brand-logo" src="cliffe-lab-logo.png" alt="Cliffe Lab"
+           onerror="this.remove();var f=document.getElementById('brandFallback');if(f)f.style.display='flex';">
+      <span id="brandFallback" class="brand-fallback">
+        <svg width="42" height="42" viewBox="0 0 42 42" fill="none" aria-hidden="true">
+          <rect width="42" height="42" rx="11" fill="#232D4B"/>
+          <path d="M13 10c0 6 16 6 16 12s-16 6-16 12" stroke="#E57200" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M29 10c0 6-16 6-16 12s16 6 16 12" stroke="#2bb3b3" stroke-width="2.4" stroke-linecap="round"/>
+          <g stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" opacity=".85">
+            <path d="M15.5 15.5h11"/><path d="M16.8 21h8.4"/><path d="M15.5 26.5h11"/>
+          </g>
+        </svg>
+        <span>Cliffe Lab<span class="sub">University of Virginia · MIC</span></span>
+      </span>
+    </a>
+    <nav class="navlinks" id="menu">
+      <a href="#focus">Research</a>
+      <a href="publications.html">Publications</a>
+      <a href="#news">News</a>
+      <a href="people.html">Team</a>
+      <a href="contact.html">Contact</a>
+      <a class="cta" href="#join">Join the Lab</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- ============ TOP LOGO BANNER (fades on scroll into hero) ============ -->
+<section class="top-banner" id="banner" aria-label="Cliffe Lab">
+  <svg class="banner-bg" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g stroke="#2bb3b3" stroke-width="1.3" fill="none" opacity=".35">
+      <path d="M-40 160 Q 320 70 680 190 T 1480 150"/>
+      <path d="M-40 440 Q 360 560 740 410 T 1480 470"/>
+    </g>
+    <g fill="#232D4B" opacity=".06"><circle cx="220" cy="150" r="4"/><circle cx="700" cy="190" r="4"/><circle cx="1120" cy="120" r="4"/><circle cx="420" cy="470" r="4"/><circle cx="980" cy="420" r="4"/></g>
+    <g fill="#E57200" opacity=".05"><circle cx="1180" cy="250" r="90"/><circle cx="230" cy="520" r="70"/></g>
+  </svg>
+  <div class="banner-inner" id="bannerInner">
+    <img class="banner-logo" src="cliffe-lab-logo.png" alt="Cliffe Lab"
+         onerror="this.remove();var f=document.getElementById('bannerFallback');if(f)f.style.display='block';">
+    <div id="bannerFallback" class="banner-fallback" style="display:none">Cliffe&nbsp;Lab</div>
+    <p class="banner-tag">Molecular Virology &amp; Neuronal Latency · University of Virginia</p>
+    <div class="banner-scroll">
+      <span>Scroll</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <!-- subtle science background: neurons + viral capsids + helix -->
+  <svg class="science-bg" viewBox="0 0 1440 760" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="nline" x1="0" x2="1"><stop offset="0" stop-color="#2bb3b3" stop-opacity=".0"/><stop offset=".5" stop-color="#2bb3b3" stop-opacity=".55"/><stop offset="1" stop-color="#2bb3b3" stop-opacity="0"/></linearGradient>
+      <radialGradient id="cap" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#E57200" stop-opacity=".5"/><stop offset="1" stop-color="#E57200" stop-opacity="0"/></radialGradient>
+    </defs>
+    <g stroke="url(#nline)" stroke-width="1.4" fill="none">
+      <path class="drift" d="M-40 150 Q 300 60 620 200 T 1480 150"/>
+      <path class="drift2" d="M-40 420 Q 360 560 720 400 T 1480 480"/>
+      <path class="drift" d="M-40 640 Q 420 540 820 660 T 1480 600"/>
+    </g>
+    <g fill="#232D4B" opacity=".07">
+      <circle cx="180" cy="150" r="4"/><circle cx="620" cy="200" r="4"/><circle cx="1040" cy="120" r="4"/>
+      <circle cx="360" cy="470" r="4"/><circle cx="820" cy="400" r="4"/><circle cx="1200" cy="500" r="4"/>
+    </g>
+    <!-- hexagonal capsid hints -->
+    <g fill="url(#cap)">
+      <circle cx="1150" cy="230" r="70"/><circle cx="250" cy="600" r="55"/>
+    </g>
+    <g stroke="#232D4B" stroke-width="1.2" fill="none" opacity=".12">
+      <polygon points="1150,180 1195,207 1195,257 1150,284 1105,257 1105,207"/>
+      <polygon points="250,562 283,581 283,619 250,638 217,619 217,581"/>
+    </g>
+  </svg>
+
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="reveal in">
+        <p class="eyebrow">Molecular Virology · Neuroscience</p>
+        <h1>How viruses go <span class="hl">silent</span> — and how they wake back up.</h1>
+        <p class="lead">The Cliffe Lab uncovers the molecular switches that let herpes simplex virus hide inside neurons for a lifetime, and the signals that trigger it to reactivate and cause disease.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#join">Join the Lab
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="#publications">See our research</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card float">
+          <img class="hero-fig" src="lab-hero.png"
+               alt="Model of HSV-1 latency in neurons: an ATRX and H3K9me3 chromatin block, reinforced by interferon-induced PML/DAXX, restricts viral reactivation."
+               onerror="var c=this.parentNode;this.remove();var fb=c.querySelector('.hero-fallback');if(fb)fb.style.display='block';">
+          <div class="hero-fallback" style="display:none">
+            <div class="inner">
+              <svg viewBox="0 0 400 300" aria-hidden="true">
+                <rect width="400" height="300" fill="none"/>
+                <g stroke="#8fa0c8" stroke-width="2" fill="none" opacity=".8">
+                  <path d="M120 150 C 90 120, 60 130, 40 100"/><path d="M120 150 C 95 180, 60 175, 44 205"/>
+                  <path d="M120 150 C 105 110, 120 90, 100 60"/><path d="M280 150 L 380 150"/>
+                </g>
+                <circle cx="150" cy="150" r="42" fill="#33406a" stroke="#E57200" stroke-width="2.5"/>
+                <circle cx="150" cy="150" r="20" fill="#232D4B" stroke="#2bb3b3" stroke-width="2"/>
+                <path d="M138 150 q 12 -12 24 0 q -12 12 -24 0" fill="none" stroke="#f59331" stroke-width="2"/>
+                <g transform="translate(300,150)"><polygon points="0,-14 12,-7 12,7 0,14 -12,7 -12,-7" fill="#E57200" opacity=".9"/><polygon points="0,-8 7,-4 7,4 0,8 -7,4 -7,-4" fill="#232D4B"/></g>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <p class="hero-cap">Interferon strengthens an ATRX·H3K9me3 chromatin block — reinforced by PML/DAXX — that restricts HSV-1 reactivation in latently infected neurons.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOCUS BLOCK ============ -->
+<section class="focus" id="focus">
+  <svg class="grain" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g stroke="#ffffff" stroke-width="1" fill="none" opacity=".05">
+      <path d="M0 120 Q 360 40 720 120 T 1440 120"/>
+      <path d="M0 300 Q 360 220 720 300 T 1440 300"/>
+      <path d="M0 480 Q 360 400 720 480 T 1440 480"/>
+    </g>
+    <g fill="#E57200" opacity=".05"><circle cx="1180" cy="90" r="120"/><circle cx="180" cy="520" r="90"/></g>
+  </svg>
+  <div class="wrap">
+    <div class="focus-head reveal">
+      <p class="eyebrow">Our Focus</p>
+      <h2>Decoding the lifelong dialogue between virus and neuron</h2>
+      <p>Herpes simplex virus infects most of the world's population and persists for life by establishing a silent, latent infection in neurons. We study the chromatin, signaling, and immune mechanisms that keep the virus dormant — and what tips the balance toward reactivation, recurrent disease, and neurological consequences.</p>
+    </div>
+    <div class="subfocus">
+      <div class="sf-card reveal d1">
+        <span class="sf-num">01</span>
+        <div class="sf-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M7 3c0 5 10 5 10 9s-10 4-10 9M17 3c0 5-10 5-10 9s10 4 10 9" stroke="#f59331" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Chromatin control of latency</h3>
+        <p>How neurons package the viral genome into heterochromatin — via marks like H3K9me3 and factors such as ATRX and Daxx/H3.3 — to enforce and maintain silencing.</p>
+      </div>
+      <div class="sf-card reveal d2">
+        <span class="sf-num">02</span>
+        <div class="sf-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 2v6m0 8v6M4 12H2m20 0h-2M6 6L4.5 4.5m15 15L18 18M6 18l-1.5 1.5M19.5 4.5 18 6" stroke="#f59331" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="3.4" stroke="#f59331" stroke-width="2"/></svg>
+        </div>
+        <h3>Triggers of reactivation</h3>
+        <p>The neuronal stress and signaling pathways — including DLK/JNK and mitochondrial nucleic-acid sensing co-opted by viral proteins — that awaken the virus from dormancy.</p>
+      </div>
+      <div class="sf-card reveal d3">
+        <span class="sf-num">03</span>
+        <div class="sf-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v5c0 4.4-3 8-7 10-4-2-7-5.6-7-10V6l7-3z" stroke="#f59331" stroke-width="2" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="#f59331" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Neuronal innate immunity</h3>
+        <p>How neurons mount and remember antiviral defenses — including interferon-driven immune memory — using human sensory-neuron models to study host–virus conflict.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PUBLICATIONS ============ -->
+<section class="pubs" id="publications">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <p class="eyebrow">From the Bench</p>
+        <h2>Latest Publications</h2>
+        <p>Pulled live from Europe PMC and updated automatically as new work is indexed.</p>
+      </div>
+      <span class="live-tag"><span class="live-dot"></span> Live from Europe PMC</span>
+    </div>
+    <div class="pub-grid" id="pubGrid" aria-live="polite"><!-- JS injects cards --></div>
+    <div class="pub-more reveal">
+      <a class="btn btn-ghost" id="allPubs" href="publications.html">
+        View all publications
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#232D4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEWS ============ -->
+<section class="news" id="news">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <p class="eyebrow">What's Happening</p>
+        <h2>Lab News</h2>
+        <p>Awards, new papers, and life in the lab. <!-- EDIT ME: update these items over time --></p>
+      </div>
+    </div>
+    <div class="news-grid">
+      <!-- EDIT THESE ITEMS: each is anchored to a real recent event; swap freely -->
+      <article class="news-item reveal d1">
+        <span class="news-tag">New Paper</span>
+        <div class="news-date">February 2026</div>
+        <h3>Interferon-driven immune memory in latent neurons</h3>
+        <p>Our study on how interferon establishes an H3K9me3-based immune memory during HSV-1 latency — restricted by ATRX — is out in <em>Nature Communications</em>.</p>
+      </article>
+      <article class="news-item reveal d2">
+        <span class="news-tag">Award</span>
+        <div class="news-date">Placeholder</div>
+        <h3>Congratulations to our trainees</h3>
+        <p><!-- EDIT ME -->Add a recent fellowship, travel award, or thesis milestone here to celebrate lab members.</p>
+      </article>
+      <article class="news-item reveal d3">
+        <span class="news-tag">Welcome</span>
+        <div class="news-date">Placeholder</div>
+        <h3>New members joining the lab</h3>
+        <p><!-- EDIT ME -->Introduce a new graduate student, postdoc, or rotation student, and what they'll be working on.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONNECT / LINKS ============ -->
+<section class="connect" id="join">
+  <div class="wrap">
+    <p class="eyebrow" style="text-align:center;color:var(--orange-soft)">Get Involved</p>
+    <h2>Join us at the University of Virginia</h2>
+    <p class="sub">We welcome curious graduate students, rotation students, and postdocs excited about virology, chromatin, and neuroscience. Explore our department and how to apply.</p>
+    <div class="link-grid">
+      <a class="link-card reveal d1" href="https://med.virginia.edu/mic/" target="_blank" rel="noopener">
+        <div class="k">Department</div>
+        <h3>UVA MIC</h3>
+        <p>Microbiology, Immunology &amp; Cancer Biology — the largest basic science department at UVA and our academic home.</p>
+        <span class="go">Visit department <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <a class="link-card reveal d2" href="https://med.virginia.edu/bims/prospective-students/apply-now/" target="_blank" rel="noopener">
+        <div class="k">Graduate Admissions</div>
+        <h3>Apply via BIMS</h3>
+        <p>The Biomedical Sciences (BIMS) umbrella PhD program is the gateway to rotating in our lab. Applications open ~Sept 1, due ~Dec 1.</p>
+        <span class="go">Start your application <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <a class="link-card reveal d3" href="https://med.virginia.edu/bims/programs/ph-d-degree-options/microbiology/" target="_blank" rel="noopener">
+        <div class="k">PhD Track</div>
+        <h3>Microbiology Program</h3>
+        <p>Learn about the Microbiology PhD track within BIMS, coursework, and the research training that shapes our students.</p>
+        <span class="go">Explore the track <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="brand" href="#top">
+          <svg width="38" height="38" viewBox="0 0 42 42" fill="none" aria-hidden="true">
+            <rect width="42" height="42" rx="11" fill="#E57200"/>
+            <path d="M13 10c0 6 16 6 16 12s-16 6-16 12" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M29 10c0 6-16 6-16 12s16 6 16 12" stroke="#232D4B" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+          <span>Cliffe Lab<span class="sub">University of Virginia</span></span>
+        </a>
+        <p style="max-width:34ch;margin-top:16px;font-size:.9rem">Department of Microbiology, Immunology &amp; Cancer Biology, UVA School of Medicine, Charlottesville, VA.</p>
+      </div>
+      <div class="foot-cols">
+        <div>
+          <h4>Explore</h4>
+          <a href="#focus">Research</a>
+          <a href="publications.html">Publications</a>
+          <a href="#news">Lab News</a>
+          <a href="people.html">Team</a>
+          <a href="contact.html">Contact</a>
+          <a href="#join">Join the Lab</a>
+        </div>
+        <div>
+          <h4>University</h4>
+          <a href="https://med.virginia.edu/mic/" target="_blank" rel="noopener">UVA MIC Department</a>
+          <a href="https://med.virginia.edu/bims/prospective-students/apply-now/" target="_blank" rel="noopener">BIMS — Apply</a>
+          <a href="https://med.virginia.edu/bims/programs/ph-d-degree-options/microbiology/" target="_blank" rel="noopener">Microbiology PhD</a>
+          <a href="https://pubmed.ncbi.nlm.nih.gov/?term=Cliffe+AR%5BAuthor%5D+AND+Virginia%5BAffiliation%5D&sort=date" target="_blank" rel="noopener">PubMed</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="yr"></span> Cliffe Lab · University of Virginia</span>
+      <span>Publications feed via Europe PMC</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- header shadow on scroll ---------- */
+  var header = document.getElementById('top');
+  var banner = document.getElementById('banner');
+  var bannerInner = document.getElementById('bannerInner');
+  var brand = document.getElementById('brandLink');
+  var clamp = function(v){ return v<0?0:(v>1?1:v); };
+  var onScroll = function(){
+    var y = window.scrollY;
+    header.classList.toggle('scrolled', y > 8);
+    if(banner){
+      var bh = banner.offsetHeight || 1;
+      var p = clamp(y / (bh*0.62));                 // banner fades out over first ~62% of its height
+      if(bannerInner){ bannerInner.style.opacity = (1-p); bannerInner.style.transform = 'translateY(' + (p*-40) + 'px)'; }
+      if(brand){ brand.style.opacity = clamp((y - bh*0.28) / (bh*0.34)); } // header logo fades in as banner leaves
+    } else if(brand){ brand.style.opacity = 1; }
+  };
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll, {passive:true});
+  onScroll();
+
+  /* ---------- mobile menu ---------- */
+  var burger = document.getElementById('burger'), menu = document.getElementById('menu');
+  burger.addEventListener('click', function(){ menu.classList.toggle('open'); });
+  menu.addEventListener('click', function(e){ if(e.target.tagName==='A') menu.classList.remove('open'); });
+
+  /* ---------- scroll reveal ---------- */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, {threshold:.14, rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  /* ---------- footer year ---------- */
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  /* ================= LIVE PUBLICATIONS ================= */
+  var GRID = document.getElementById('pubGrid');
+  var EPMC = 'https://www.ebi.ac.uk/europepmc/webservices/rest/';
+  // A single Europe PMC query returns title, authors, journal, year, abstract, PMID, PMCID & DOI.
+  // NOT SRC:PPR excludes preprints — delete that clause to also show bioRxiv/medRxiv preprints.
+  var QUERY = 'AUTH:"Cliffe AR" AND AFF:Virginia NOT SRC:PPR';
+  var N = 4; // number of publications to show
+
+  /* deterministic science-themed SVG placeholder (used when no OA figure) */
+  function placeholder(seed, title){
+    var palettes = [['#232D4B','#2bb3b3'],['#233a4b','#E57200'],['#2a2350','#f59331'],['#12303a','#2bb3b3']];
+    var p = palettes[Math.abs(hash(seed)) % palettes.length];
+    var r = mulberry32(Math.abs(hash(seed)));
+    var dots = '';
+    for(var i=0;i<7;i++){ dots += '<circle cx="'+(20+r()*110)+'" cy="'+(20+r()*150)+'" r="'+(2+r()*3)+'" fill="#fff" opacity="'+(0.12+r()*0.2).toFixed(2)+'"/>'; }
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 190" preserveAspectRatio="xMidYMid slice">'
+      + '<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="'+p[0]+'"/><stop offset="1" stop-color="'+p[1]+'"/></linearGradient></defs>'
+      + '<rect width="150" height="190" fill="url(#g)"/>'
+      + '<path d="M35 20c0 30 80 30 80 60s-80 30-80 60" stroke="#ffffff" stroke-opacity=".22" stroke-width="2.2" fill="none"/>'
+      + '<path d="M115 20c0 30-80 30-80 60s80 30 80 60" stroke="#ffffff" stroke-opacity=".22" stroke-width="2.2" fill="none"/>'
+      + dots + '</svg>';
+    return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+  }
+  function hash(s){ s=String(s); var h=0; for(var i=0;i<s.length;i++){ h=(h<<5)-h+s.charCodeAt(i); h|=0; } return h; }
+  function mulberry32(a){ return function(){ a|=0;a=a+0x6D2B79F5|0; var t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+
+  function fmtAuthors(str){
+    if(!str) return '';
+    var names = str.replace(/\.\s*$/,'').split(/,\s*/); // Europe PMC gives a single string
+    var out;
+    if(names.length<=6){
+      out = names.join(', ');
+    } else {
+      var head = names.slice(0,5);
+      // always surface the lab PI even when she's the senior (last) author
+      var cliffe = names.filter(function(n){ return /^Cliffe /.test(n); }).pop();
+      out = (cliffe && head.indexOf(cliffe)===-1)
+          ? head.join(', ') + ', …, ' + cliffe
+          : head.join(', ') + ', et al.';
+    }
+    return out.replace(/(Cliffe [A-Z]{1,3})/g, '<b>$1</b>'); // bold the PI
+  }
+  function words(text, n){
+    if(!text) return '';
+    var w = text.replace(/\s+/g,' ').trim().split(' ');
+    return w.length>n ? w.slice(0,n).join(' ') + '…' : w.join(' ');
+  }
+  function jget(url){ return fetch(url).then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); }); }
+  function tget(url){ return fetch(url).then(function(r){ if(!r.ok) throw new Error(r.status); return r.text(); }); }
+
+  function skeletons(){
+    var s='';
+    for(var i=0;i<N;i++){
+      s += '<div class="pub-card skeleton"><div class="pub-thumb sk"></div><div class="pub-body">'
+        + '<div class="sk" style="height:12px;width:40%;margin-bottom:12px"></div>'
+        + '<div class="sk" style="height:18px;width:92%;margin-bottom:8px"></div>'
+        + '<div class="sk" style="height:18px;width:70%;margin-bottom:14px"></div>'
+        + '<div class="sk" style="height:12px;width:100%;margin-bottom:6px"></div>'
+        + '<div class="sk" style="height:12px;width:100%;margin-bottom:6px"></div>'
+        + '<div class="sk" style="height:12px;width:60%"></div></div></div>';
+    }
+    GRID.innerHTML = s;
+  }
+
+  /* fetch first open-access figure via Europe PMC; resolve to image URL or null */
+  function fetchFigure(pmcid){
+    if(!pmcid) return Promise.resolve(null);
+    var id = pmcid.replace(/[^0-9A-Z]/gi,''); // PMC12764766
+    var url = 'https://www.ebi.ac.uk/europepmc/webservices/rest/'+id+'/fullTextXML';
+    return tget(url).then(function(xml){
+      var m = xml.match(/<graphic[^>]*xlink:href="([^"]+)"/i);
+      if(!m) return null;
+      var blob = m[1];
+      if(!/\.(jpe?g|png|gif|tif?f)$/i.test(blob)) blob += '.jpg';
+      // Europe PMC's canonical figure-blob renderer (same URL its article pages resolve to).
+      // Loaded via <img>, which follows redirects and needs no CORS.
+      return 'https://europepmc.org/backend/ptpmcrender.fcgi?acc='+id
+           + '&blobtype=image&blobname=' + encodeURIComponent(blob);
+    }).catch(function(){ return null; });
+  }
+
+  function esc(s){ return String(s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+
+  function render(items){
+    GRID.innerHTML = items.map(function(p){
+      var img = p.figure || placeholder(p.pmid, p.title);
+      var link = p.link || ('https://pubmed.ncbi.nlm.nih.gov/'+p.pmid+'/');
+      var ph = placeholder(p.pmid, p.title);
+      return '<article class="pub-card reveal">'
+        + '<div class="pub-thumb"><img loading="lazy" src="'+img+'" alt="Figure from: '+esc(p.title)+'" '
+        + 'onerror="this.onerror=null;this.src=\''+ph+'\'"></div>'
+        + '<div class="pub-body">'
+        +   '<div class="pub-journal">'+esc(p.journal)+' <span class="yr">· '+esc(p.year)+'</span></div>'
+        +   '<h3><a href="'+link+'" target="_blank" rel="noopener">'+esc(p.title)+'</a></h3>'
+        +   '<div class="pub-authors">'+p.authors+'</div>'
+        +   '<p class="pub-abs">'+esc(p.abstract)+'</p>'
+        +   '<a class="pub-link" href="'+link+'" target="_blank" rel="noopener">Read on PubMed '
+        +     '<svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>'
+        + '</div></article>';
+    }).join('');
+    // re-run reveal on the new cards
+    GRID.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  }
+
+  function showError(){
+    GRID.innerHTML = '<div class="pub-error">Publications couldn\'t load right now. '
+      + '<a class="pub-link" style="display:inline-flex" href="'+document.getElementById('allPubs').href+'" target="_blank" rel="noopener">View them on PubMed →</a></div>';
+  }
+
+  function load(){
+    skeletons();
+    // ONE call: search + metadata + abstract, newest first. resultType=core includes abstractText.
+    var url = EPMC + 'search?query=' + encodeURIComponent(QUERY)
+            + '&resultType=core&format=json&pageSize=' + N
+            + '&sort=' + encodeURIComponent('P_PDATE_D desc');
+    jget(url).then(function(d){
+      var rows = (d.resultList && d.resultList.result) || [];
+      if(!rows.length){ showError(); return; }
+      var items = rows.map(function(r){
+        var ji = (r.journalInfo && r.journalInfo.journal) || {};
+        var link = r.pmid ? 'https://pubmed.ncbi.nlm.nih.gov/'+r.pmid+'/'
+                 : r.doi  ? 'https://doi.org/'+r.doi
+                 : 'https://europepmc.org/article/'+(r.source||'MED')+'/'+r.id;
+        return {
+          pmid: r.pmid || r.id,
+          title: (r.title||'').replace(/\.$/,''),
+          journal: ji.isoabbreviation || ji.medlineAbbreviation || ji.title || '',
+          year: r.pubYear || '',
+          authors: fmtAuthors(r.authorString),
+          abstract: words((r.abstractText||'Abstract not available.').replace(/<[^>]+>/g,' '), 95),
+          pmcid: r.pmcid || '',
+          link: link,
+          figure: null
+        };
+      });
+      render(items); // show immediately with placeholders
+      // then upgrade with the first open-access figure where one exists
+      items.forEach(function(it, idx){
+        fetchFigure(it.pmcid).then(function(u){
+          if(!u) return;
+          var card = GRID.children[idx];
+          if(!card) return;
+          var im = card.querySelector('img');
+          if(im){ var probe = new Image(); probe.onload = function(){ im.src = u; }; probe.src = u; }
+        });
+      });
+    }).catch(function(err){ console.error('Pub feed error:', err); showError(); });
+  }
+
+  load();
+})();
+</script>
+</body>
+</html>

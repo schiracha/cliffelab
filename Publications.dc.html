@@ -12,8 +12,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  html{scroll-behavior:smooth}
-  body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#1b2233;background:#fff;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  html{scroll-behavior:smooth;overflow-x:hidden}
+  body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#1b2233;background:#fff;line-height:1.6;-webkit-font-smoothing:antialiased}
   a{color:#232D4B;text-decoration:none}
   a:hover{color:#E57200}
   *{box-sizing:border-box}
@@ -66,8 +66,8 @@
         </div>
         <div style="display:grid;gap:18px">
           <sc-for list="{{ grp.items }}" as="p" hint-placeholder-count="2">
-            <article style="display:grid;grid-template-columns:132px 1fr;background:#fff;border:1px solid #e2e7f0;border-radius:18px;overflow:hidden;box-shadow:0 10px 40px rgba(35,45,75,.10);transition:transform .25s,box-shadow .25s" style-hover="transform:translateY(-4px);box-shadow:0 24px 70px rgba(35,45,75,.16)">
-              <div data-pmcid="{{ p.pmcid }}" data-pmid="{{ p.pmid }}" style="position:relative;min-height:150px;background:#232D4B;overflow:hidden">
+            <article style="{{ cardStyle }}" style-hover="transform:translateY(-4px);box-shadow:0 24px 70px rgba(35,45,75,.16)">
+              <div data-pmcid="{{ p.pmcid }}" data-pmid="{{ p.pmid }}" style="{{ imgWrapStyle }}">
                 <img loading="lazy" src="{{ p.img }}" data-ph="{{ p.placeholder }}" onError="{{ onImgErr }}" alt="Figure" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
               </div>
               <div style="padding:20px 24px;display:flex;flex-direction:column">
@@ -102,11 +102,16 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:900}}">
 class Component extends DCLogic {
-  state = { items: null, loading: true, pubError: false, count: 0 };
+  state = { items: null, loading: true, pubError: false, count: 0, narrow: false };
 
-  componentDidMount(){ this.setupReveals(); this.setupFigures(); this.load(); }
+  componentDidMount(){
+    this.setupReveals(); this.setupFigures(); this.load();
+    this._r = () => this.setState({ narrow: window.innerWidth <= 640 });
+    window.addEventListener('resize', this._r, { passive: true });
+    this._r();
+  }
   componentDidUpdate(){ if (this._observeReveals) this._observeReveals(); this.observeFigures(); }
-  componentWillUnmount(){ if (this._revIO) this._revIO.disconnect(); if (this._figIO) this._figIO.disconnect(); }
+  componentWillUnmount(){ if (this._revIO) this._revIO.disconnect(); if (this._figIO) this._figIO.disconnect(); window.removeEventListener('resize', this._r); }
   setupFigures(){
     this._figIO = new IntersectionObserver((ents) => {
       ents.forEach(e => {
@@ -232,7 +237,13 @@ class Component extends DCLogic {
       groups,
       skeletons: [1, 2, 3, 4, 5],
       liveLabel: this.state.loading ? 'Loading live from Europe PMC…' : (this.state.pubError ? 'Live from Europe PMC' : this.state.count + ' publications · live from Europe PMC'),
-      onImgErr: (e) => { const ph = e.currentTarget.getAttribute('data-ph'); if (ph && e.currentTarget.src !== ph) e.currentTarget.src = ph; }
+      onImgErr: (e) => { const ph = e.currentTarget.getAttribute('data-ph'); if (ph && e.currentTarget.src !== ph) e.currentTarget.src = ph; },
+      cardStyle: this.state.narrow
+        ? 'display:grid;grid-template-columns:1fr;background:#fff;border:1px solid #e2e7f0;border-radius:18px;overflow:hidden;box-shadow:0 10px 40px rgba(35,45,75,.10);transition:transform .25s,box-shadow .25s'
+        : 'display:grid;grid-template-columns:132px 1fr;background:#fff;border:1px solid #e2e7f0;border-radius:18px;overflow:hidden;box-shadow:0 10px 40px rgba(35,45,75,.10);transition:transform .25s,box-shadow .25s',
+      imgWrapStyle: this.state.narrow
+        ? 'position:relative;width:100%;aspect-ratio:16/9;max-height:180px;background:#232D4B;overflow:hidden'
+        : 'position:relative;min-height:150px;background:#232D4B;overflow:hidden'
     };
   }
 }
