@@ -163,7 +163,7 @@
     </sc-if>
 
     <div style="text-align:center;margin-top:44px">
-      <a href="Publications.dc.html" style="display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:.98rem;padding:14px 26px;border-radius:100px;background:#fff;color:#232D4B;box-shadow:0 10px 40px rgba(35,45,75,.10);transition:transform .2s" style-hover="transform:translateY(-2px)">
+      <a href="publications.html" style="display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:.98rem;padding:14px 26px;border-radius:100px;background:#fff;color:#232D4B;box-shadow:0 10px 40px rgba(35,45,75,.10);transition:transform .2s" style-hover="transform:translateY(-2px)">
         View all publications
         <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#232D4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
@@ -327,7 +327,35 @@ class Component extends DCLogic {
         };
       });
       this.setState({ pubs: items, loading: false, pubError: false });
+      items.forEach((it, idx) => this.upgradeFigure(it, idx));
     }).catch(err => { console.error('Pub feed error:', err); this.setState({ loading: false, pubError: true }); });
+  }
+
+  upgradeFigure(it, idx){
+    if (!it.pmcid) return;
+    const id = it.pmcid.replace(/[^0-9A-Z]/gi, '');
+    fetch('https://www.ebi.ac.uk/europepmc/webservices/rest/' + id + '/fullTextXML').then(r => r.ok ? r.text() : '').then(xml => {
+      const figs = xml.match(/<fig\b[\s\S]*?<\/fig>/gi) || [];
+      let href = null;
+      for (let i = figs.length - 1; i >= 0; i--) {                 // last real figure in the paper
+        const g = figs[i].match(/<graphic[^>]*xlink:href="([^"]+)"/i);
+        if (g) { href = g[1]; break; }
+      }
+      if (!href) { const g = xml.match(/<graphic[^>]*xlink:href="([^"]+)"/i); if (g) href = g[1]; }
+      if (!href) return;
+      if (!/\.(jpe?g|png|gif|tif?f)$/i.test(href)) href += '.jpg';
+      const u = 'https://www.ncbi.nlm.nih.gov/pmc/articles/' + id + '/bin/' + href;
+      const probe = new Image();
+      probe.onload = () => {
+        this.setState(s => {
+          if (!s.pubs) return null;
+          const pubs = s.pubs.slice();
+          if (pubs[idx]) pubs[idx] = { ...pubs[idx], img: u };
+          return { pubs };
+        });
+      };
+      probe.src = u;
+    }).catch(() => {});
   }
 
   renderVals(){
