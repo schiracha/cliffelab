@@ -327,35 +327,7 @@ class Component extends DCLogic {
         };
       });
       this.setState({ pubs: items, loading: false, pubError: false });
-      items.forEach((it, idx) => this.upgradeFigure(it, idx));
     }).catch(err => { console.error('Pub feed error:', err); this.setState({ loading: false, pubError: true }); });
-  }
-
-  upgradeFigure(it, idx){
-    if (!it.pmcid) return;
-    const id = it.pmcid.replace(/[^0-9A-Z]/gi, '');
-    fetch('https://www.ebi.ac.uk/europepmc/webservices/rest/' + id + '/fullTextXML').then(r => r.ok ? r.text() : '').then(xml => {
-      const figs = xml.match(/<fig\b[\s\S]*?<\/fig>/gi) || [];
-      let href = null;
-      for (let i = figs.length - 1; i >= 0; i--) {                 // last real figure in the paper
-        const g = figs[i].match(/<graphic[^>]*xlink:href="([^"]+)"/i);
-        if (g) { href = g[1]; break; }
-      }
-      if (!href) { const g = xml.match(/<graphic[^>]*xlink:href="([^"]+)"/i); if (g) href = g[1]; }
-      if (!href) return;
-      if (!/\.(jpe?g|png|gif|tif?f)$/i.test(href)) href += '.jpg';
-      const u = 'https://www.ncbi.nlm.nih.gov/pmc/articles/' + id + '/bin/' + href;
-      const probe = new Image();
-      probe.onload = () => {
-        this.setState(s => {
-          if (!s.pubs) return null;
-          const pubs = s.pubs.slice();
-          if (pubs[idx]) pubs[idx] = { ...pubs[idx], img: u };
-          return { pubs };
-        });
-      };
-      probe.src = u;
-    }).catch(() => {});
   }
 
   renderVals(){

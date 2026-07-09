@@ -105,35 +105,13 @@ class Component extends DCLogic {
   state = { items: null, loading: true, pubError: false, count: 0, narrow: false };
 
   componentDidMount(){
-    this.setupReveals(); this.setupFigures(); this.load();
+    this.setupReveals(); this.load();
     this._r = () => this.setState({ narrow: window.innerWidth <= 640 });
     window.addEventListener('resize', this._r, { passive: true });
     this._r();
   }
-  componentDidUpdate(){ if (this._observeReveals) this._observeReveals(); this.observeFigures(); }
-  componentWillUnmount(){ if (this._revIO) this._revIO.disconnect(); if (this._figIO) this._figIO.disconnect(); window.removeEventListener('resize', this._r); }
-  setupFigures(){
-    this._figIO = new IntersectionObserver((ents) => {
-      ents.forEach(e => {
-        if (!e.isIntersecting) return;
-        const el = e.target; this._figIO.unobserve(el);
-        const pmcid = el.getAttribute('data-pmcid'); const pmid = el.getAttribute('data-pmid');
-        if (!pmcid) return;
-        const items = this.state.items || [];
-        const idx = items.findIndex(x => String(x.pmid) === String(pmid));
-        if (idx < 0) return;
-        this.upgradeFigure(items[idx], idx);
-      });
-    }, { rootMargin: '400px' });
-  }
-  observeFigures(){
-    if (!this._figIO) return;
-    document.querySelectorAll('[data-pmcid]').forEach(el => {
-      if (el.__figobs) return;
-      el.__figobs = 1;
-      if (el.getAttribute('data-pmcid')) this._figIO.observe(el);
-    });
-  }
+  componentDidUpdate(){ if (this._observeReveals) this._observeReveals(); }
+  componentWillUnmount(){ if (this._revIO) this._revIO.disconnect(); window.removeEventListener('resize', this._r); }
   setupReveals(){
     this._reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     this._revIO = new IntersectionObserver((ents) => {
@@ -194,35 +172,7 @@ class Component extends DCLogic {
         };
       });
       this.setState({ items, loading: false, pubError: false, count: items.length });
-      // figures load lazily per card as they scroll into view (see setupFigures/observeFigures)
     }).catch(err => { console.error('Pub list error:', err); this.setState({ loading: false, pubError: true }); });
-  }
-
-  upgradeFigure(it, idx){
-    if (!it.pmcid) return;
-    const id = it.pmcid.replace(/[^0-9A-Z]/gi, '');
-    fetch('https://www.ebi.ac.uk/europepmc/webservices/rest/' + id + '/fullTextXML').then(r => r.ok ? r.text() : '').then(xml => {
-      const figs = xml.match(/<fig\b[\s\S]*?<\/fig>/gi) || [];
-      let href = null;
-      for (let i = figs.length - 1; i >= 0; i--) {                 // last real figure in the paper
-        const g = figs[i].match(/<graphic[^>]*xlink:href="([^"]+)"/i);
-        if (g) { href = g[1]; break; }
-      }
-      if (!href) { const g = xml.match(/<graphic[^>]*xlink:href="([^"]+)"/i); if (g) href = g[1]; }
-      if (!href) return;
-      if (!/\.(jpe?g|png|gif|tif?f)$/i.test(href)) href += '.jpg';
-      const u = 'https://www.ncbi.nlm.nih.gov/pmc/articles/' + id + '/bin/' + href;
-      const probe = new Image();
-      probe.onload = () => {
-        this.setState(s => {
-          if (!s.items) return null;
-          const items = s.items.slice();
-          if (items[idx] && items[idx].pmid === it.pmid) items[idx] = { ...items[idx], img: u };
-          return { items };
-        });
-      };
-      probe.src = u;
-    }).catch(() => {});
   }
 
   renderVals(){
