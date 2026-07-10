@@ -14,7 +14,7 @@
 const REPO_OWNER = 'schiracha';
 const REPO_NAME = 'cliffelab';
 const REPO_BRANCH = 'main';
-const PHOTO_PATH = 'PHOTOS';
+const PHOTO_PATH = 'LAB PHOTOS';
 
 function parseDateFromName(name) {
   const m = name.match(/-(\d{4})(\d{2})(\d{2})\.txt$/i);
@@ -30,7 +30,7 @@ function parseField(text, field) {
 }
 
 export async function fetchPhotoItems() {
-  const apiUrl = 'https://api.github.com/repos/' + REPO_OWNER + '/' + REPO_NAME + '/contents/' + NEWS_PATH + '?ref=' + REPO_BRANCH;
+  const apiUrl = 'https://api.github.com/repos/' + REPO_OWNER + '/' + REPO_NAME + '/contents/' + PHOTO_PATH + '?ref=' + REPO_BRANCH;
   let listing;
   try {
     const res = await fetch(apiUrl, { headers: { Accept: 'application/vnd.github.v3+json' } });
