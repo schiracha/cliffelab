@@ -334,7 +334,11 @@ class Component extends DCLogic {
     const w = text.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().split(' ');
     return w.length > n ? w.slice(0, n).join(' ') + '…' : w.join(' ');
   }
-  newsExcerpt(msg){ return this.words(msg, 30); }
+  newsExcerpt(msg){
+    // Strip *italic* markers and any URL so the homepage teaser stays clean.
+    const clean = String(msg || '').replace(/\*/g, '').replace(/\s*https?:\/\/\S+/g, '').replace(/\bat\s*$/i, '').trim();
+    return this.words(clean, 30);
+  }
 
   loadPubs(){
     const EPMC = 'https://www.ebi.ac.uk/europepmc/webservices/rest/';

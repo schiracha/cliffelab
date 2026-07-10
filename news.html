@@ -103,6 +103,22 @@ class Component extends DCLogic {
     this._observeReveals();
   }
 
+  // Turns a plain message string into rich nodes: *text* -> italic, and any
+  // http(s) URL -> a clickable link. Returns an array React renders as-is.
+  richNodes(str){
+    if (!str) return '';
+    let k = 0;
+    return String(str).split(/(\*[^*]+\*|https?:\/\/[^\s]+)/g).map(tok => {
+      if (!tok) return null;
+      if (/^\*[^*]+\*$/.test(tok)) return React.createElement('i', { key: k++ }, tok.slice(1, -1));
+      if (/^https?:\/\//.test(tok)) {
+        const href = tok.replace(/[).,]+$/, '');
+        return React.createElement('a', { key: k++, href, target: '_blank', rel: 'noopener', style: { color: '#232D4B', fontWeight: 700, wordBreak: 'break-word' } }, href.replace(/^https?:\/\//, ''));
+      }
+      return tok;
+    }).filter(x => x !== null);
+  }
+
   renderVals(){
     return {
       loading: this.state.loading,
@@ -110,6 +126,7 @@ class Component extends DCLogic {
       empty: !this.state.loading && !(this.state.items && this.state.items.length),
       items: (this.state.items || []).map(n => ({
         ...n,
+        message: this.richNodes(n.message),
         imageWrapStyle: n.image
           ? ('width:100%;aspect-ratio:21/9;overflow:hidden;background:#232D4B center/cover no-repeat url("' + n.image + '")')
           : 'display:none'
