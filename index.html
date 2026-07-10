@@ -189,7 +189,7 @@
     </div>
 
     <sc-if value="{{ newsLoading }}" hint-placeholder-val="{{ true }}">
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:26px">
+      <div style="{{ newsGrid }}">
         <sc-for list="{{ newsSkeletons }}" as="s" hint-placeholder-count="6">
           <div style="border:1px solid #e2e7f0;border-radius:18px;padding:30px 28px;background:#fff">
             <div style="height:11px;width:30%;margin-bottom:16px;border-radius:6px;background:linear-gradient(90deg,#eef1f7 25%,#e3e8f1 37%,#eef1f7 63%);background-size:400% 100%;animation:clfsh 1.4s infinite"></div>
@@ -205,8 +205,8 @@
     </sc-if>
 
     <sc-if value="{{ newsHasItems }}" hint-placeholder-val="{{ false }}">
-      <div data-reveal style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:26px">
-        <sc-for list="{{ newsItems }}" as="n" hint-placeholder-count="3">
+      <div data-reveal style="{{ newsGrid }}">
+        <sc-for list="{{ newsItems }}" as="n" hint-placeholder-count="6">
           <article style="{{ newsCardStyle }}" style-hover="transform:translateY(-6px);box-shadow:0 10px 40px rgba(35,45,75,.10)">
             <div style="{{ n.imageWrapStyle }}"></div>
             <div style="padding:26px 28px">
@@ -286,7 +286,7 @@ class Component extends DCLogic {
   }
   loadNews(){
     import('./news-data.js').then(mod => mod.fetchNewsItems()).then(items => {
-      this.setState({ newsItems: items.slice(0, 3), newsLoading: false });
+      this.setState({ newsItems: items.slice(0, 6), newsLoading: false });
     }).catch(err => { console.error('News feed error:', err); this.setState({ newsItems: [], newsLoading: false }); });
   }
   componentDidUpdate(){ if (this._observeReveals) this._observeReveals(); }
@@ -392,7 +392,8 @@ class Component extends DCLogic {
       skelImgStyle: this.state.cardNarrow
         ? 'width:100%;aspect-ratio:16/9;max-height:180px;background:linear-gradient(90deg,#eef1f7 25%,#e3e8f1 37%,#eef1f7 63%);background-size:400% 100%;animation:clfsh 1.4s infinite'
         : 'background:linear-gradient(90deg,#eef1f7 25%,#e3e8f1 37%,#eef1f7 63%);background-size:400% 100%;animation:clfsh 1.4s infinite',
-      newsSkeletons: [1, 2, 3],
+      newsSkeletons: [1, 2, 3, 4, 5, 6],
+      newsGrid: 'display:grid;grid-template-columns:repeat(' + (this.state.cardNarrow ? 1 : (this.state.narrow ? 2 : 3)) + ',minmax(0,1fr));gap:26px',
       newsLoading: this.state.newsLoading,
       newsHasItems: !this.state.newsLoading && !!(this.state.newsItems && this.state.newsItems.length),
       newsEmpty: !this.state.newsLoading && !(this.state.newsItems && this.state.newsItems.length),
