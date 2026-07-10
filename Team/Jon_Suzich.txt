@@ -1,7 +1,7 @@
 Name: "Jon Suzich"
 Position: "Graduate Student"
-Description: "The lab's first graduate student (F30, UVA Wagner Fellowship). Now in the UVA MSTP."
+Description: "The lab's first graduate student (F30, UVA Wagner Fellowship). Now a Dermatology Resident at UPMC in Pittsburgh"
 Start Year: "2018"
 End Year: "2021"
-Link: "https://www.linkedin.com/in/austin-schinlever-657923134/"
+Link: "https://www.linkedin.com/in/jonsuzich/"
 [End]
