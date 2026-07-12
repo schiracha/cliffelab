@@ -1,6 +1,6 @@
 Name: "Randall Schirra"
 Position: "Postdoctoral Associate"
-Description: "Randall is a Evolutionary Structural Biologist training in mammalian cell culture and virology assays"
+Description: "Randall is an Evolutionary Structural Biologist training in mammalian cell culture and virology assays"
 Start Year: "2026"
 End Year: "Current"
 [End]
