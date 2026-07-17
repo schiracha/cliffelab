@@ -1,4 +1,4 @@
-Name: "Anne-Fluer Winter"
+Name: "Anne-Fleur Winter"
 Position: "Graduate Student"
 Description: ""
 Start Year: ""
