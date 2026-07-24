@@ -44,7 +44,7 @@
     <g fill="#E57200" opacity=".05"><circle cx="1180" cy="250" r="90"/><circle cx="230" cy="520" r="70"/></g>
   </svg>
   <div ref="{{ bannerInnerRef }}" style="position:relative;z-index:1;will-change:transform,opacity">
-    <img src="cliffe-lab-logo.png" alt="Cliffe Lab" style="width:min(74vw,430px);height:auto;margin:0 auto;display:block">
+    <img src="cliffe-lab-logo.png" alt="Cliffe Lab" onClick="{{ eggFn }}" style="width:min(74vw,430px);height:auto;margin:0 auto;display:block;user-select:none;-webkit-user-select:none">
     <p style="margin-top:18px;color:#5b6478;font-weight:600;font-size:clamp(.85rem,1.6vw,1.05rem);letter-spacing:.02em">Molecular Virology and Neural Immunology of HSV-1 Infection</p>
     <div style="margin-top:34px;display:inline-flex;flex-direction:column;align-items:center;gap:5px;color:#5b6478;font-size:.72rem;text-transform:uppercase;letter-spacing:.18em;font-weight:700">
       <span>Scroll</span>
@@ -367,12 +367,54 @@ class Component extends DCLogic {
     }).catch(err => { console.error('Pub feed error:', err); this.setState({ loading: false, pubError: true }); });
   }
 
+  // Easter egg: a data-URI SVG of a little virus particle (spiky capsid),
+  // built once and reused. On-brand colors, no external image needed.
+  virusSrc(){
+    if (this._virusSrc) return this._virusSrc;
+    let spikes = '';
+    const cx = 50, cy = 50, r = 23;
+    for (let a = 0; a < 360; a += 30){
+      const rad = a * Math.PI / 180;
+      const x1 = (cx + Math.cos(rad) * r).toFixed(1), y1 = (cy + Math.sin(rad) * r).toFixed(1);
+      const x2 = (cx + Math.cos(rad) * (r + 13)).toFixed(1), y2 = (cy + Math.sin(rad) * (r + 13)).toFixed(1);
+      spikes += '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="#E57200" stroke-width="3"/><circle cx="' + x2 + '" cy="' + y2 + '" r="4.5" fill="#f59331"/>';
+    }
+    const svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><radialGradient id="b" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#ffd9c2"/><stop offset="55%" stop-color="#E57200"/><stop offset="100%" stop-color="#232D4B"/></radialGradient></defs>' + spikes + '<circle cx="50" cy="50" r="23" fill="url(#b)" stroke="#c85f00" stroke-width="1.5"/><circle cx="43" cy="43" r="4" fill="#fff" opacity=".5"/></svg>';
+    this._virusSrc = 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+    return this._virusSrc;
+  }
+  // Rain ~2 dozen virus particles down the viewport, then clean them up.
+  virusRain(){
+    if (this._raining) return; // ignore rapid re-clicks while a shower is active
+    this._raining = true;
+    const N = 24;
+    const src = this.virusSrc();
+    const vh = window.innerHeight;
+    let done = 0;
+    for (let i = 0; i < N; i++){
+      const el = document.createElement('img');
+      el.src = src; el.alt = '';
+      const size = 16 + Math.random() * 28;
+      el.style.cssText = 'position:fixed;top:-70px;left:' + (Math.random() * 100).toFixed(2) + 'vw;width:' + size.toFixed(0) + 'px;height:' + size.toFixed(0) + 'px;z-index:9999;pointer-events:none;will-change:transform,opacity';
+      document.body.appendChild(el);
+      const drift = (Math.random() * 2 - 1) * 140;
+      const spin = (Math.random() * 2 - 1) * 720;
+      const anim = el.animate([
+        { transform: 'translate(0,0) rotate(0deg)', opacity: 1 },
+        { transform: 'translate(' + drift.toFixed(0) + 'px,' + (vh + 140) + 'px) rotate(' + spin.toFixed(0) + 'deg)', opacity: 1, offset: 0.82 },
+        { transform: 'translate(' + drift.toFixed(0) + 'px,' + (vh + 140) + 'px) rotate(' + spin.toFixed(0) + 'deg)', opacity: 0 }
+      ], { duration: 2600 + Math.random() * 2400, delay: Math.random() * 550, easing: 'cubic-bezier(.35,.15,.6,1)', fill: 'forwards' });
+      anim.onfinish = () => { el.remove(); if (++done === N) this._raining = false; };
+    }
+  }
+
   renderVals(){
     this.bannerRef = this.bannerRef || React.createRef();
     this.bannerInnerRef = this.bannerInnerRef || React.createRef();
     return {
       bannerRef: this.bannerRef,
       bannerInnerRef: this.bannerInnerRef,
+      eggFn: () => this.virusRain(),
       heroCols: this.state.narrow ? '1fr' : 'minmax(0,1.15fr) minmax(0,.85fr)',
       loading: this.state.loading,
       pubError: this.state.pubError,
