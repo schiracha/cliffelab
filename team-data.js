@@ -26,7 +26,9 @@ const ORANGE = 'linear-gradient(160deg,#E57200,#c85f00)';
 function parseField(text, field) {
   const re = new RegExp(field + '\\s*:\\s*"([\\s\\S]*?)"', 'i');
   const m = text.match(re);
-  return m ? m[1].trim() : '';
+  // Strip carriage returns so Windows/OneDrive CRLF line endings render as
+  // clean line breaks under white-space:pre-line.
+  return m ? m[1].replace(/\r/g, '').trim() : '';
 }
 
 function initialsFor(name) {
