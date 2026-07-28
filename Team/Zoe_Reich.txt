@@ -1,6 +1,6 @@
 Name: "Zoe Reich"
 Position: "Graduate Student"
-Description: ""
-Start Year: ""
+Description: "Zoe is a PhD student in the Neuroscience Graduate Program at UVA. She studies the role of ATRX during HSV-1 infection. Aside from studying a really cool virus, Zoe also loves to communicate science, which she does through Skype a Scientist and Project Bridge at UVA."
+Start Year: "2024"
 End Year: "Current"
 [End]
