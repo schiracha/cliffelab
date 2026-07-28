@@ -1,8 +1,8 @@
 Name: "Patryk Krakowiak"
 Position: "Postdoctoral Associate"
-Description: "Patryk is a postdoctoral researcher in the Cliffe lab at the University of Virginia, where he also completed his PhD in Biomedical Sciences. His doctoral work focused on molecular mechanisms regulating HSV-1 reactivation in neurons, during which he identified the first viral protein required for optimal HSV-1 reactivation.
-<br>He joined the lab initially as a Fulbright BioLAB Awardee and previously served as President of the Polish–U.S. Fulbright BioLAB Program (2019/20). During his PhD, he was awarded an American Heart Association (AHA) Predoctoral Fellowship supporting his research on viral reactivation mechanisms. He holds both a Master’s and Engineering degree in Biotechnology from the Lodz University of Technology in Poland.
-<br>urrently, his work in the Cliffe lab focuses on dissecting molecular pathways governing HSV-1 latency and reactivation, including neuronal stress responses, mitochondrial signaling, and non-canonical NF-κB pathways. His long-term goal is to develop mechanistic insights that can inform strategies to prevent viral reactivation and reduce disease burden."
+Description: "Patryk is a postdoctoral researcher in the Cliffe lab at the University of Virginia, where he also completed his PhD in Biomedical Sciences. His doctoral work focused on molecular mechanisms regulating HSV-1 reactivation in neurons, during which he identified the first viral protein required for optimal HSV-1 reactivation."
+<br>"He joined the lab initially as a Fulbright BioLAB Awardee and previously served as President of the Polish–U.S. Fulbright BioLAB Program (2019/20). During his PhD, he was awarded an American Heart Association (AHA) Predoctoral Fellowship supporting his research on viral reactivation mechanisms. He holds both a Master’s and Engineering degree in Biotechnology from the Lodz University of Technology in Poland."
+<br>"Currently, his work in the Cliffe lab focuses on dissecting molecular pathways governing HSV-1 latency and reactivation, including neuronal stress responses, mitochondrial signaling, and non-canonical NF-κB pathways. His long-term goal is to develop mechanistic insights that can inform strategies to prevent viral reactivation and reduce disease burden."
 Start Year: ""
 End Year: "Current"
 [End]
