@@ -1,6 +1,7 @@
 Name: "Dilruba Akter"
 Position: "Postdoctoral Associate"
-Description: "Dilruba Akter is a postdoc in the Cliffe Laboratory at the University of Virginia, where she investigates the interplay between viral infections and neurodegenerative diseases. She earned her B.Sc. (Hons.) and M.Sc. in Microbiology from the University of Dhaka, Bangladesh, and completed her Ph.D. at SUNY Upstate Medical University, USA. Her doctoral work was focusing on how Human Cytomegalovirus (HCMV) induces heat shock factor 1 (HSF1) to promote viral replication, with potential therapeutic implications. Currently, her research centers on exploring the effects of HSV-1 infection in mice, particularly how HSV-1 synergizes with genetic risk factors (APOE mutations) to accelerate cognitive decline and CNS pathology, with a focus on Alzheimer’s-related biomarkers."
+Description: "Dilruba Akter is a postdoc in the Cliffe Laboratory at the University of Virginia, where she investigates the interplay between viral infections and neurodegenerative diseases. She earned her B.Sc. (Hons.) and M.Sc. in Microbiology from the University of Dhaka, Bangladesh, and completed her Ph.D. at SUNY Upstate Medical University, USA. <br>
+Her doctoral work was focusing on how Human Cytomegalovirus (HCMV) induces heat shock factor 1 (HSF1) to promote viral replication, with potential therapeutic implications. Currently, her research centers on exploring the effects of HSV-1 infection in mice, particularly how HSV-1 synergizes with genetic risk factors (APOE mutations) to accelerate cognitive decline and CNS pathology, with a focus on Alzheimer’s-related biomarkers."
 Start Year: "2024"
 End Year: "current"
 Link: ""
