@@ -1,6 +1,10 @@
 Name: "Chandra Shekar Misra"
 Position: "Postdoctoral Associate"
-Description: ""
-Start Year: ""
+Description: "Chandra Shekhar Misra, Ph.D., is an engineer (by Degree) turned biologist, as his interest wavered from once being a part-time environmental biotechnologist to what he now prefers to call himself: a fundamental biologist. After a brief stint in corporate world after his Bachelor´s, he returned to academia and has been there ever since.
+
+His initial experiences piqued his curiosity to work with these seemingly inanimate life forms which not only feed us but also possess one of the most interesting physiologies for coping with different environmental factors. Yes, we’re talking about plants. He finished his PhD in Plant sciences from Portugal before moving to US for his postdoc. He did his first postdoc at UMASS Chan Medical school, working on understanding the molecular mechanism behind transcriptional buffering in budding yeast.
+
+He joined Cliffe lab at UVA in April 2025 to work on something more translational- an area he has been eager to explore for some time now. Currently, he is focussed on understanding how host cells regulate the HSV-1 viral gene silencing by manipulating its chromatin structure."
+Start Year: "2025"
 End Year: "Current"
 [End]
