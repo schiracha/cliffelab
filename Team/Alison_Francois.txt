@@ -1,6 +1,6 @@
 Name: "Alison Francois"
 Position: "Graduate Student"
-Description: "Graduate student; facultative heterochromatin in HSV latency."
+Description: "Graduate student; facultative heterochromatin in HSV latency. Now a Postdoctoral Associate in the Feng Lab at the Wexner Research Institute."
 Start Year: "2018"
 End Year: "2024"
 Link: "https://www.linkedin.com/in/alisonfrancois/"

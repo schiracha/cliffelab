@@ -1,6 +1,6 @@
 Name: "Abby Whitford"
 Position: "Graduate Student"
-Description: "Graduate student; epigenetics of HSV latency."
+Description: "Graduate student; epigenetics of HSV latency. Now a Postdoctoral Associate in the LusKing Lab at Yale."
 Start Year: "2021"
 End Year: "2025"
 Link: "https://www.linkedin.com/in/abigail-whitford/"
