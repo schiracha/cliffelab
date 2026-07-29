@@ -1,6 +1,6 @@
 Name: "Anne-Fleur Winter"
 Position: "Graduate Student"
-Description: ""
-Start Year: ""
+Description: "Anne-Fleur Winter is an upcoming scientist dedicated to uncovering the cellular mechanisms behind disease. She holds a Bachelor of Science in Biochemistry from the University of Maryland and Masters of Science in Microbiology and immunology from Dalhousie University. Driven by a passion for structural biology and microbiology, her research spans chaperone proteins, muscle disorders, and microbial pathogenesis. Anne-Fleur is committed to translating complex biochemical data into innovative therapeutic insights, routinely sharing her findings at national scientific conferences."
+Start Year: "2024"
 End Year: "Current"
 [End]

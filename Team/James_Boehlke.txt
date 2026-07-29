@@ -1,6 +1,6 @@
 Name: "James Boehlke"
 Position: "Graduate Student"
-Description: ""
-Start Year: ""
+Description: "Originally from Colorado Springs, CO, he earned his B.S. in Biochemistry from Colorado State University, where he also served as the Vice President of the university’s SACNAS chapter. James's graduate research focuses on uncovering the role of RNA-binding proteins during Herpes Simplex Virus (HSV) latent infection and reactivation in neurons. His technical expertise includes a suite of molecular biology and virology methodologies."
+Start Year: "2023"
 End Year: "Current"
 [End]

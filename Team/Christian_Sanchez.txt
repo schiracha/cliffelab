@@ -1,6 +1,8 @@
 Name: "Christian J. Sanchez"
 Position: "Technical Assistant"
-Description: ""
+Description: "Christian joined the Cliffe Lab as an Intermediate Lab Specialist to investigate the molecular mechanics governing Herpes Simplex Virus 1 (HSV-1) latency and reactivation. His current research focuses on defining how the host cellular factor c-fos influences the HSV-1 reactivation process in neurons.
+
+Before moving to UVA, Christian earned his Master of Science in Virology from the Complutense University of Madrid (2024), where he specialized in the metagenomic and phylogenetic characterization of parvoviruses. He holds a Bachelor of Science in Biology from the National University of Trujillo in Peru. Christian integrates his expertise in cell culture, quantitative RT-PCR, and genomics to decode the complex host-virus interactions that drive chronic neuronal infections."
 Start Year: ""
 End Year: "Current"
 [End]
