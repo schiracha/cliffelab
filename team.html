@@ -88,13 +88,14 @@
         </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,480px),1fr));gap:24px">
           <sc-for list="{{ grp.members }}" as="m" hint-placeholder-count="3">
-            <div style="background:#fff;border:1px solid #e2e7f0;border-radius:18px;padding:24px;overflow:hidden;transition:transform .3s,box-shadow .3s" style-hover="transform:translateY(-5px);box-shadow:0 10px 40px rgba(35,45,75,.10)">
+            <div onClick="{{ m.onToggle }}" style="background:#fff;border:1px solid #e2e7f0;border-radius:18px;padding:24px;overflow:hidden;cursor:{{ m.cardCursor }};transition:transform .3s,box-shadow .3s" style-hover="transform:translateY(-5px);box-shadow:0 10px 40px rgba(35,45,75,.10)">
               <div style="width:148px;height:148px;border-radius:50%;display:grid;place-items:center;background:{{ m.avatarBg }};color:#fff;font-weight:800;font-size:2.2rem;position:relative;overflow:hidden;float:left;margin:0 20px 10px 0">
                 <div style="{{ m.imgStyle }}"></div>{{ m.initials }}
               </div>
-              <h3 style="font-size:1.12rem;color:#232D4B;margin:0">{{ m.name }}</h3>
+              <h3 style="font-size:1.12rem;color:#232D4B;margin:0"><sc-if value="{{ m.link }}" hint-placeholder-val="{{ true }}"><a href="{{ m.link }}" target="_blank" rel="noopener" onClick="{{ stopProp }}" style="color:#232D4B" style-hover="color:#E57200">{{ m.name }}</a></sc-if><sc-if value="{{ m.noLink }}" hint-placeholder-val="{{ false }}">{{ m.name }}</sc-if></h3>
               <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#E57200;margin:4px 0 9px">{{ m.role }}</div>
-              <sc-if value="{{ m.bio }}" hint-placeholder-val="{{ true }}"><p style="font-size:.9rem;color:#4a5265;margin:0;white-space:pre-line">{{ m.bio }}</p></sc-if>
+              <sc-if value="{{ m.bio }}" hint-placeholder-val="{{ true }}"><p style="font-size:.9rem;color:#4a5265;margin:0;white-space:pre-line">{{ m.bioShown }}</p></sc-if>
+              <sc-if value="{{ m.hasMore }}" hint-placeholder-val="{{ false }}"><div style="font-size:.76rem;font-weight:700;color:#E57200;margin:10px 0 0">{{ m.moreLabel }}</div></sc-if>
             </div>
           </sc-for>
         </div>
@@ -136,7 +137,16 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:900}}">
 class Component extends DCLogic {
-  state = { members: null, teamLoading: true, alumni: [] };
+  state = { members: null, teamLoading: true, alumni: [], expanded: {} };
+  toggle(slug){ this.setState(s => ({ expanded: { ...s.expanded, [slug]: !s.expanded[slug] } })); }
+  // Collapsed preview = last N sentences (periods delimit sentences).
+  lastSentences(text, n){
+    // Split only on a period that ends a sentence (period + whitespace or end),
+    // so decimals, URLs, and abbreviations like "e.g." stay intact.
+    const parts = String(text || '').split(/\.(?=\s|$)/).map(s => s.trim()).filter(Boolean);
+    if (parts.length <= n) return { preview: String(text || '').trim(), hasMore: false };
+    return { preview: parts.slice(-n).join('. ').replace(/\s+/g, ' ') + '.', hasMore: true };
+  }
   componentDidMount(){
     this.setupReveals();
     import('./team-data.js').then(mod => mod.fetchTeamMembers().then(members => ({ mod, members }))).then(({ mod, members }) => {
@@ -164,17 +174,29 @@ class Component extends DCLogic {
     return {
       emailHref: 'mailto:' + 'ude.ainigriv@effilc'.split('').reverse().join(''),
       onImgErr: (e) => { e.currentTarget.style.display = 'none'; },
+      stopProp: (e) => { e.stopPropagation(); },
       teamLoading: this.state.teamLoading,
       teamEmpty: !this.state.teamLoading && !(this.state.groups && this.state.groups.length),
       teamSkeletons: [1, 2, 3],
       groups: (this.state.groups || []).map(g => ({
         ...g,
-        members: g.members.map(m => ({
-          ...m,
-          imgStyle: m.img
-            ? ('position:absolute;inset:0;background:center/cover no-repeat url("' + m.img + '")')
-            : 'display:none'
-        }))
+        members: g.members.map(m => {
+          const { preview, hasMore } = this.lastSentences(m.bio, 2);
+          const expanded = !!this.state.expanded[m.slug];
+          return {
+            ...m,
+            link: m.link || '',
+            noLink: !m.link,
+            bioShown: (expanded || !hasMore) ? (m.bio || '') : preview,
+            hasMore,
+            moreLabel: expanded ? 'Show less ↑' : 'Read more ↓',
+            cardCursor: hasMore ? 'pointer' : 'default',
+            onToggle: () => this.toggle(m.slug),
+            imgStyle: m.img
+              ? ('position:absolute;inset:0;background:center/cover no-repeat url("' + m.img + '")')
+              : 'display:none'
+          };
+        })
       })),
       alumni: (this.state.alumni || []).map(a => ({
         ...a,
