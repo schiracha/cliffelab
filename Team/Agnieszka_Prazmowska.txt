@@ -1,6 +1,6 @@
 Name: "Agnieszka Prazmowska"
 Position: "BioLab Student"
-Description: "Visiting graduate student from Fulbright BioLab program who worked on HSV-1 epigenetic signaling. She is now pursuing her PhD at the Josep Carreras Leukaemia Research Institute (IJC) in Barcelona"
+Description: "Visiting graduate student from Fulbright BioLab program; HSV-1 epigenetic signaling. She is now pursuing her PhD at the Josep Carreras Leukaemia Research Institute (IJC) in Barcelona"
 Start Year: "2025"
 End Year: "2026"
 Link: "https://www.linkedin.com/in/agnieszka-pra%C5%BCmowska-309702303/"
