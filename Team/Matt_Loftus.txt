@@ -1,4 +1,4 @@
-Name: "Matt Loftus"
+Name: "Matt Loftus, MS"
 Position: "Lab Manager"
 Description: "Matt studies the mechanisms of Polycomb silencing in HSV latency and the role of a viral non-coding RNA."
 Start Year: ""

@@ -1,4 +1,4 @@
-Name: "Patryk Krakowiak"
+Name: "Patryk Krakowiak, PhD"
 Position: "Postdoctoral Associate"
 Description: "Patryk is a postdoctoral researcher in the Cliffe lab at the University of Virginia, where he also completed his PhD in Biomedical Sciences. His doctoral work focused on molecular mechanisms regulating HSV-1 reactivation in neurons, during which he identified the first viral protein required for optimal HSV-1 reactivation.
 He joined the lab initially as a Fulbright BioLAB Awardee and previously served as President of the Polish–U.S. Fulbright BioLAB Program (2019/20). During his PhD, he was awarded an American Heart Association (AHA) Predoctoral Fellowship supporting his research on viral reactivation mechanisms. He holds both a Master’s and Engineering degree in Biotechnology from the Lodz University of Technology in Poland.
