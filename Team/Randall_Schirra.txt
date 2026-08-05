@@ -1,8 +1,8 @@
 Name: "Randall Schirra"
 Position: "Postdoctoral Associate"
-Description: "Randall holds a PhD in Biophysics and has an extensive background in leveraging advanced structural biology techniques to understand viral-host interactions and the mechanisms that drive capsid assembly and topology.Dr. Schirra's research roots trace back to 2013 in the lab of Peijun Zhang at the University of Pittsburgh, where he investigated the HIV capsid structure, completed his undergraduate studies, and mastered cryoEM data processing. 
+Description: "Randall holds a PhD in Biophysics and has an extensive background in leveraging advanced structural biology techniques to understand viral-host interactions and the mechanisms that drive capsid assembly and topology.Dr. Schirra's research roots trace back to 2013 in the lab of Peijun Zhang at the University of Pittsburgh, where he investigated the HIV capsid structure, completed his undergraduate studies, and mastered cryoEM data processing. Outside of academic research, he brings unique leadership and teaching experience as a former Naval Nuclear Instructor and Division Officer. He is also trained in studio arts/design and enjoys creative ventures.
 
-His graduate and postdoc work expanded on structural investigations of the HIV pentamer, cryoEM of liposomes, and viral host interactions. He has joined the Cliffe lab at UVA to continue his structural biology path while also gaining experience in cell biology and virology methods. Outside of academic research, he brings unique leadership and teaching experience as a former Naval Nuclear Instructor and Division Officer. He is also trained in studio arts/design and enjoys creative ventures."
+His graduate and postdoc work expanded on structural investigations of the HIV pentamer, cryoEM of liposomes, and viral host interactions. He joined the Cliffe lab at UVA to continue his structural biology path while also gaining experience in cell biology and virology methods."
 Start Year: "2026"
 End Year: "Current"
 [End]
