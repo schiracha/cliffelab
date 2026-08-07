@@ -20,7 +20,7 @@ const TEAM_PATH = 'Team';
 // Any position not listed here falls after these, alphabetically.
 // Current members are grouped into these fixed sections, in this order.
 // Anyone who isn't a postdoc, grad student, or undergrad falls into "Personnel".
-const CATEGORY_ORDER = ['Postdoctoral Researchers', 'Graduate Students', 'Undergraduate Students', 'Personnel'];
+const CATEGORY_ORDER = ['Personnel', 'Undergraduate Students', 'Graduate Students', 'Postdoctoral Researchers'];
 
 function categoryFor(position) {
   const p = (position || '').toLowerCase();
