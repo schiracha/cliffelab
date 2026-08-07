@@ -18,7 +18,17 @@ const TEAM_PATH = 'Team';
 
 // Controls the order role-group sections appear in on the Team page.
 // Any position not listed here falls after these, alphabetically.
-const GROUP_ORDER = ['Lab Manager', 'Technical Assistant', 'Graduate Student', 'Postdoctoral Fellow'];
+// Current members are grouped into these fixed sections, in this order.
+// Anyone who isn't a postdoc, grad student, or undergrad falls into "Personnel".
+const CATEGORY_ORDER = ['Postdoctoral Researchers', 'Graduate Students', 'Undergraduate Students', 'Personnel'];
+
+function categoryFor(position) {
+  const p = (position || '').toLowerCase();
+  if (/postdoc/.test(p)) return 'Postdoctoral Researchers';
+  if (/undergrad/.test(p)) return 'Undergraduate Students'; // check before "graduate"
+  if (/graduate/.test(p)) return 'Graduate Students';
+  return 'Personnel';
+}
 
 const NAVY = 'linear-gradient(160deg,#232D4B,#33406a)';
 const ORANGE = 'linear-gradient(160deg,#E57200,#c85f00)';
@@ -125,19 +135,10 @@ export function splitCurrentAndAlumni(members) {
 
 export function groupByPosition(members) {
   const map = {};
-  const order = [];
   members.forEach((m) => {
-    const key = m.role || 'Team';
-    if (!map[key]) { map[key] = []; order.push(key); }
-    map[key].push(m);
+    const key = categoryFor(m.role);
+    (map[key] || (map[key] = [])).push(m);
   });
-  order.sort((a, b) => {
-    const ia = GROUP_ORDER.indexOf(a);
-    const ib = GROUP_ORDER.indexOf(b);
-    if (ia === -1 && ib === -1) return a.localeCompare(b);
-    if (ia === -1) return 1;
-    if (ib === -1) return -1;
-    return ia - ib;
-  });
-  return order.map((key) => ({ title: pluralize(key), members: map[key] }));
+  // Only render sections that actually have members, in the fixed order above.
+  return CATEGORY_ORDER.filter((k) => map[k] && map[k].length).map((key) => ({ title: key, members: map[key] }));
 }
