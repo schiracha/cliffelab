@@ -126,7 +126,7 @@
     <div data-reveal style="background:radial-gradient(700px 360px at 85% 0%,rgba(43,179,179,.14),transparent 60%),#1a2338;color:#fff;border-radius:22px;padding:48px;text-align:center">
       <h2 style="font-size:1.7rem;font-weight:800;margin:0 0 12px">Interested in joining us?</h2>
       <p style="color:#c2cadd;max-width:52ch;margin:0 auto 24px">We welcome graduate students, rotation students, and postdocs curious about virology, chromatin, and neuroscience.</p>
-      <a href="index.html#join" style="display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:.98rem;padding:14px 26px;border-radius:100px;background:#E57200;color:#fff;box-shadow:0 10px 26px rgba(229,114,0,.32);transition:transform .2s,box-shadow .25s" style-hover="transform:translateY(-2px);box-shadow:0 16px 34px rgba(229,114,0,.4)">See how to join
+      <a href="{{ joinHref }}" style="display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:.98rem;padding:14px 26px;border-radius:100px;background:#E57200;color:#fff;box-shadow:0 10px 26px rgba(229,114,0,.32);transition:transform .2s,box-shadow .25s" style-hover="transform:translateY(-2px);box-shadow:0 16px 34px rgba(229,114,0,.4)">{{ joinLabel }}
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </div>
@@ -176,6 +176,9 @@ class Component extends DCLogic {
       emailHref: 'mailto:' + 'ude.ainigriv@effilc'.split('').reverse().join(''),
       onImgErr: (e) => { e.currentTarget.style.display = 'none'; },
       stopProp: (e) => { e.stopPropagation(); },
+      // Join CTA: goes to join.html while recruiting (site-config.js), else to the department/BIMS info
+      joinHref: (window.CLIFFE_CONFIG && window.CLIFFE_CONFIG.recruiting) ? 'join.html' : 'index.html#join',
+      joinLabel: (window.CLIFFE_CONFIG && window.CLIFFE_CONFIG.recruiting) ? 'Join the Lab' : 'See how to join',
       teamLoading: this.state.teamLoading,
       teamEmpty: !this.state.teamLoading && !(this.state.groups && this.state.groups.length),
       teamSkeletons: [1, 2, 3],

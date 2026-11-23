@@ -235,6 +235,13 @@
     <p style="text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;font-weight:700;text-align:center;color:#f59331;margin:0 0 14px">Get Involved</p>
     <h2 style="font-size:clamp(1.8rem,3.2vw,2.5rem);font-weight:800;text-align:center;margin:0 0 14px;line-height:1.15;letter-spacing:-.02em">Join us at the University of Virginia</h2>
     <p style="text-align:center;color:#c2cadd;max-width:56ch;margin:0 auto 48px;font-size:1.1rem">We welcome curious graduate students, rotation students, and postdocs excited about virology, chromatin, and neuroscience. Explore our department and how to apply.</p>
+    <sc-if value="{{ recruiting }}" hint-placeholder-val="{{ true }}">
+      <div style="text-align:center;margin:-22px 0 48px">
+        <a href="join.html" style="display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:1rem;padding:14px 30px;border-radius:100px;background:#E57200;color:#fff;box-shadow:0 10px 26px rgba(229,114,0,.32);transition:transform .2s,box-shadow .25s" style-hover="transform:translateY(-2px);box-shadow:0 16px 34px rgba(229,114,0,.4);color:#fff">Join the Lab
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </sc-if>
     <div data-reveal style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;max-width:920px;margin:0 auto">
       <a href="https://med.virginia.edu/mic/" target="_blank" rel="noopener" style="background:linear-gradient(165deg,rgba(255,255,255,.08),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:30px 26px;display:block;text-decoration:none;color:#fff;transition:transform .3s,border-color .3s" style-hover="transform:translateY(-7px);border-color:#E57200">
         <div style="font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#f59331;margin-bottom:12px">Department</div>
@@ -416,6 +423,7 @@ class Component extends DCLogic {
       bannerRef: this.bannerRef,
       bannerInnerRef: this.bannerInnerRef,
       eggFn: () => this.virusRain(),
+      recruiting: !!(window.CLIFFE_CONFIG && window.CLIFFE_CONFIG.recruiting), // set in site-config.js
       heroCols: this.state.narrow ? '1fr' : 'minmax(0,1.15fr) minmax(0,.85fr)',
       loading: this.state.loading,
       pubError: this.state.pubError,
