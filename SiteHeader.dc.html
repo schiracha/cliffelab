@@ -26,7 +26,7 @@
         <sc-for list="{{ links }}" as="link" hint-placeholder-count="5">
           <a href="{{ link.href }}" style="color:{{ link.color }};text-decoration:none;transition:color .2s" style-hover="color:#232D4B">{{ link.label }}</a>
         </sc-for>
-        <!-- a href="index.html#join" style="background:#232D4B;color:#fff;padding:10px 20px;border-radius:100px;text-decoration:none;transition:transform .2s,background .2s" style-hover="background:#E57200;color:#fff;transform:translateY(-1px)">Join the Lab</a -->
+        <sc-if value="{{ recruiting }}" hint-placeholder-val="{{ true }}"><a href="join.html" style="background:#232D4B;color:#fff;padding:10px 20px;border-radius:100px;text-decoration:none;transition:transform .2s,background .2s" style-hover="background:#E57200;color:#fff;transform:translateY(-1px)">Join the Lab</a></sc-if>
       </nav>
     </sc-if>
 
@@ -44,7 +44,7 @@
       <sc-for list="{{ links }}" as="link" hint-placeholder-count="5">
         <a href="{{ link.href }}" onClick="{{ closeMenu }}" style="color:{{ link.color }};text-decoration:none">{{ link.label }}</a>
       </sc-for>
-      <a href="index.html#join" onClick="{{ closeMenu }}" style="color:#232D4B;text-decoration:none;font-weight:700">Join the Lab →</a>
+      <sc-if value="{{ recruiting }}" hint-placeholder-val="{{ true }}"><a href="join.html" onClick="{{ closeMenu }}" style="color:#232D4B;text-decoration:none;font-weight:700">Join the Lab →</a></sc-if>
     </nav>
   </sc-if>
 </header>
@@ -85,6 +85,7 @@ class Component extends DCLogic {
     };
     return {
       links, headerStyle,
+      recruiting: !!(window.CLIFFE_CONFIG && window.CLIFFE_CONFIG.recruiting), // set in site-config.js
       narrow: this.state.narrow,
       showInlineNav: !this.state.narrow,
       mobileOpen: this.state.narrow && this.state.menuOpen,

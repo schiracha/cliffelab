@@ -29,7 +29,7 @@
           <a href="index.html#news" style="display:block;color:#9aa3ba;font-size:.92rem;margin-bottom:9px;text-decoration:none;transition:color .2s" style-hover="color:#f59331">Lab News</a>
           <a href="team.html" style="display:block;color:#9aa3ba;font-size:.92rem;margin-bottom:9px;text-decoration:none;transition:color .2s" style-hover="color:#f59331">Team</a>
           <a href="contact.html" style="display:block;color:#9aa3ba;font-size:.92rem;margin-bottom:9px;text-decoration:none;transition:color .2s" style-hover="color:#f59331">Contact</a>
-          <a href="index.html#join" style="display:block;color:#9aa3ba;font-size:.92rem;margin-bottom:9px;text-decoration:none;transition:color .2s" style-hover="color:#f59331">Join the Lab</a>
+          <sc-if value="{{ recruiting }}" hint-placeholder-val="{{ true }}"><a href="join.html" style="display:block;color:#9aa3ba;font-size:.92rem;margin-bottom:9px;text-decoration:none;transition:color .2s" style-hover="color:#f59331">Join the Lab</a></sc-if>
         </div>
         <div>
           <h4 style="color:#fff;font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;margin:0 0 14px">University</h4>
@@ -52,6 +52,7 @@ class Component extends DCLogic {
   renderVals(){
     return {
       year: new Date().getFullYear(),
+      recruiting: !!(window.CLIFFE_CONFIG && window.CLIFFE_CONFIG.recruiting), // set in site-config.js
       tagline: this.props.tagline || 'Publications feed via Europe PMC'
     };
   }
